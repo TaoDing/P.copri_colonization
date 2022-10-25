@@ -1,0 +1,87 @@
+#/bin/bash
+#PBS -N 16s_qiime2 pipeline
+#PBS -l nodes=1:ppn=16
+#PBS -j n
+#PBS -q batch
+#PBS -e qiime2.err
+#PBS -o qiime2.out
+
+
+source activate qiime2-2019.7
+
+time qiime tools import \
+  --type 'SampleData[PairedEndSequencesWithQuality]' \
+  --input-path manifest.txt \
+  --output-path demux.qza \
+  --input-format PairedEndFastqManifestPhred33V2
+
+time qiime cutadapt trim-paired \
+  --i-demultiplexed-sequences demux.qza \
+  --p-cores 8 --p-front-f GTGCCAGCMGCCGCGGTAA \
+  --p-front-r GGACTACHVGGGTWTCTAAT \
+  --o-trimmed-sequences demux_tiv.qza
+
+time qiime demux summarize \
+  --i-data demux_tiv.qza \
+  --o-visualization demux_tiv.qzv
+
+time qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs demux_tiv.qza \
+  --p-trim-left-f 0 \
+  --p-trim-left-r 0 \
+  --p-trunc-len-f 0 \
+  --p-trunc-len-r 0 \
+  --o-table table.qza \
+  --o-representative-sequences rep-seqs.qza \
+  --o-denoising-stats denoising-stats.qza
+
+time qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences rep-seqs.qza \
+  --o-alignment aligned-rep-seqs.qza \
+  --o-masked-alignment masked-aligned.qza \
+  --o-tree unrooted-tree.qza \
+  --o-rooted-tree rooted-tree.qza
+
+time qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table table.qza \
+  --p-sampling-depth 10000 \
+  --m-metadata-file metadata.txt \
+  --output-dir core-metrics-results
+
+##filter mitochondria and chloroplast
+time qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-515-806-nb-classifier.qza  \
+  --i-reads rep-seqs.qza \
+  --o-classification taxonomy.qza
+
+time taxa filter-seqs \
+  --i-sequences rep-seqs.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-exclude mitochondria,chloroplast \
+  --o-filtered-sequences rep-seqs-no-mitochondria-no-chloroplast.qza
+
+time qiime feature-classifier classify-sklearn \
+  --i-classifier silva-132-99-515-806-nb-classifier.qza  \
+  --i-reads  rep-seqs-no-mitochondria-no-chloroplast.qza \
+  --o-classification taxonomy-no-mitochondria-no-chloroplast.qza
+
+time qiime taxa filter-table \
+  --i-table table.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-exclude mitochondria,chloroplast \
+  --o-filtered-table table-no-mitochondria-no-chloroplast.qza
+
+time qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences rep-seqs-no-mitochondria-no-chloroplast.qza \
+  --o-alignment aligned-rep-seqs-no-mitochondria-no-chloroplast.qza \
+  --o-masked-alignment masked-aligned-rep-seqs-no-mitochondria-no-chloroplast.qza \
+  --o-tree unrooted-tree-no-mitochondria-no-chloroplast.qza \
+  --o-rooted-tree rooted-tree-no-mitochondria-no-chloroplast.qza
+
+time qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree-no-mitochondria-no-chloroplast.qza \
+  --i-table table-no-mitochondria-no-chloroplast.qza \
+  --p-sampling-depth 10000 \
+  --m-metadata-file metadata.txt \
+  --output-dir core-metrics-results-no-mitochondria-no-chloroplast
