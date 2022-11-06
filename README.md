@@ -5,37 +5,31 @@
 
 Context:
 
+bash: bash scripts  (including 1-16s sequencing data QIIME2 analysis pipeline/ 2-metagenomic analysis code/ 3-comparative genomic analysis code) used to reproduce all processing results from raw data.
+
 R.code: R scripts used to reproduce all statistical results and visualized pictures.
 
-Source Data: Including species feature table and subject's metadata.
+Source Data: Including species feature table of and subject's metadata.
 
 Processiong Data:
 
-Figure 1. Prevalence of gut Prevotella copri significantly correlated with TIV-specific antibody production.
+Figure 2. P. copri dominated the symbiotic community and maintained a continuous colonization advantage in a 2-year cohort.
 
-Figure 2. Multi-omics analysis revealed that gut P. copri and A. megaguti-associated L-lysine metabolism strengthened the TIV vaccination response.
+Figure 3. Establishment of P. copri's colonization advantage in the human population was accompanied by a reduction in B. ovatus.
 
-Figure 3. Influenza vaccination has a greater impact on the URT microbiota than the gut microbiota.
+Figure 4. The competition between P. copri and Bacteroides spp. was due to a common requirement for multiple substrates.
 
-Figure 4. URT microbes are enriched in the gut and interact with the gut microbiota.
+Figure 5. P. copri gained colonization advantages through metabolic regulation to inhibit the expansion of commensal bacteria (especially to Bacteroides spp.).
 
-Figure 5. TIV vaccination is associated with an increase in Streptococcus and loss of some species in the URT.
+Figure 6. P. copri's competitive advantage was linked to associated with nucleotide energy substances synthesis.
 
-Figure 6. TIV vaccination reshapes the URT microbiota, affecting functional gene expression.
+Figure 7. P. copri harbored a stronger ability to synthesize ATP than B. ovatus and
+was capable of metabolizing 2'-deoxyadenosine under the impetus of ATP, promoting its growth in case of nutrient limitation.
 
-Extended Data Figure 1. Detection of H1N1-specific antibodies and correlation analysis between the antibody titer and host or microbial factors.
+Figure 8. P. copri clade A gradually became the dominant clade during host migration.
 
-Extended Data Figure 2. Multi-omics analysis framework and inter-omics variable association analysis.
 
-Extended Data Figure 3. PERMANOVA analysis between pre- vaccination and post-vaccination.
-
-Extended Data Figure 4. Vaccination led to changes in microbial interaction network and species abundance of Bifidobacterium.
-
-Extended Data Figure 5. Impact of vaccination on the abundance and microbial interaction network of dominant microbes in the upper respiratory tract.
-
-Extended Data Figure 6. Vaccination affected the association between abundances of microbes and microbial gene function.
 
 Data Availability:
-Sequencing reads for all samples have been deposited to Sequence Read Archive (SRA) (https://www.ncbi.nlm.nih.gov/sra) repository under project number PRJNA765127.
+The raw 16S rRNA gene and metagenomic sequencing data used in the present study have been deposited in the NCBI database under project ID PRJNA778894.
 
-For any other code/analysis inquiries, please open a github issue.
