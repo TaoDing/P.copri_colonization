@@ -5,7 +5,7 @@
 
 Context:
 
-bash: bash scripts  (including 1-16s sequencing data QIIME2 analysis pipeline/ 2-metagenomic analysis code/ 3-comparative genomic analysis code) used to reproduce all processing results from raw data.
+bash: bash scripts used to reproduce all processing results from raw data.
 
 R.code: R scripts used to reproduce all statistical results and visualized pictures.
 
