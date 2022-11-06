@@ -1,0 +1,551 @@
+---
+title: "Figure3"
+
+output: html_document
+---
+
+## library
+
+```{r,echo=T,warning=FALSE}
+
+library(tidytree)
+library(ggplot2)
+library(ggtree) 
+library(ggtreeExtra)
+library(ggstar)
+library(reshape2)
+library(ggpubr)
+library(statnet)
+library(circlize)
+
+
+mypal1 <- ggsci::pal_lancet( alpha = 0.8)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.8)(9)
+mypal3 <- ggsci::pal_aaas(alpha = 0.8)(9)
+
+
+
+```
+
+
+
+
+
+## Figure 3A
+
+```{r,echo=T,warning=FALSE}
+
+
+tree=read.tree ("input/Prevotella_bins_52/RAxML_bestTree.faa_refined.tre") 
+
+data=fortify(tree)
+
+
+clades.group <- read.table('input/Prevotella_bins_52/checkm_out_crz.txt',header = T,row.names = 1,sep='\t')
+
+
+metadata <- clades.group
+metadata$label <- row.names(metadata)
+
+
+tree_x <- as_tibble(tree)
+tree_y <- full_join(tree_x,metadata,by="label")  
+
+
+
+
+
+tree_group <- as.treedata(tree_y)  
+
+label <- na.omit(tree_y$label)
+
+
+
+
+
+
+
+size <- read.csv('input/Prevotella_bins_52/genome.size.txt',header=T,sep = '\t')
+size$label <- size$ID
+size <- merge(size,metadata,by='label')
+
+
+
+P <- ggtree(tree_group, layout="circular", ladderize=T, size=0.5, branch.length="none")+
+theme(legend.position="right", 
+          legend.title = element_blank(),
+          legend.text = element_text(colour="black",size=14),
+          strip.text = element_text(colour="black",size=14),
+          plot.title = element_text(size=16,face="bold",hjust = 0.5))+
+geom_hilight(node=64, fill="darkred", alpha=0.2,extend = 2)+ 
+geom_hilight(node=83, fill="#0099B4B2", alpha=0.2,extend = 3)+  
+geom_hilight(node=77, fill="#0099B4B2", alpha=0.2,extend = 3)+  
+geom_hilight(node=85, fill="darkgreen", alpha=0.2,extend = 2)+ 
+  geom_star(mapping=aes(starshape=group2,fill=group),size=2) +
+      scale_starshape_manual(values=c(1, 15))+
+   ggsci::scale_color_lancet(alpha = 0.8) +
+   ggsci::scale_fill_lancet(alpha = 0.8) 
+
+
+
+ P+geom_fruit(
+    data=size,
+    geom=geom_bar,
+    mapping = aes(y=label, x=genome.size,fill=size$group),
+    offset=0.25,
+    pwidth=0.8,
+    orientation = "y",
+    stat = "identity",
+    axis.params=list(axis="x", text.size=2,text.angle=-90,vjust=0.5,hjust=0),
+    grid.params=list(size=0.2)
+  ) + 
+  ggsci::scale_fill_lancet(alpha = 0.5)
+
+
+```
+
+
+## Figure 3B-1
+
+```{r,echo=T,warning=FALSE}
+ANI <- read.table('input//ANI_out.txt',header = F,sep = '\t')
+ANI <- ANI[,-c(4:5)]
+colnames(ANI) <- c('group1','group2','ANI')
+
+
+cladeA <- subset(clades.group,group=='CladeA')
+cladeB <- subset(clades.group,group=='CladeB')
+cladeC <- subset(clades.group,group=='CladeC')
+cladeD <- subset(clades.group,group=='CladeD')
+
+cladeA_ANI <- subset(ANI,group1%in%rownames(cladeA)&group2%in%rownames(cladeA))
+cladeA_ANI$clade <- c('CladeA')
+
+
+cladeB_ANI <- subset(ANI,group1%in%rownames(cladeB)&group2%in%rownames(cladeB))
+cladeB_ANI$clade <- c('CladeB')
+
+
+cladeC_ANI <- subset(ANI,group1%in%rownames(cladeC)&group2%in%rownames(cladeC))
+cladeC_ANI$clade <- c('CladeC')
+
+
+cladeD_ANI <- subset(ANI,group1%in%rownames(cladeD)&group2%in%rownames(cladeD))
+cladeD_ANI$clade <- c('CladeD')
+
+ANI_4 <- rbind(cladeA_ANI,cladeB_ANI,cladeC_ANI,cladeD_ANI)
+
+
+
+ggplot(ANI_4,aes(x=ANI_4$clade,y=ANI_4$ANI,fill=clade)) +
+    geom_violin(trim=F,aes(fill=factor(clade),alpha=0.5)) +
+    geom_boxplot(width=0.2,position=position_dodge(0.8))+
+    theme_bw()+ 
+    theme(legend.position="none", 
+          strip.text = element_text(colour="black",size=14),
+          axis.text.x=element_text(colour="black",size=14), 
+          axis.text.y=element_text(size=14,colour="black"), 
+          axis.title.y=element_text(size = 14,vjust = 2), 
+          axis.title.x=element_text(size = 14), 
+          plot.title = element_text(size=16,face="bold",hjust = 0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank())+
+  ggtitle('ANI within the clade')+
+  ggsci::scale_fill_lancet(alpha = 0.8)+
+ ylim(92,105)+
+    ylab("ANI")+xlab("")+  
+    theme(panel.border = element_rect(size=1)) +
+    stat_compare_means(label = "p.signif",method = 'wilcox',
+                       comparisons = list(c('CladeA','CladeB'),c('CladeA','CladeC'),c('CladeA','CladeD'),c('CladeB','CladeD')))
+
+
+```
+
+
+## Figure 3B-2
+
+```{r,echo=T,warning=FALSE}
+
+ANI <- read.table('input/ANI_out.txt',header = F,sep = '\t')
+ANI <- ANI[,-c(4:5)]
+colnames(ANI) <- c('group1','group2','ANI')
+
+
+cladeA <- subset(clades.group,group=='CladeA')
+cladeB <- subset(clades.group,group=='CladeB')
+cladeC <- subset(clades.group,group=='CladeC')
+cladeD <- subset(clades.group,group=='CladeD')
+
+A_B_ANI <- subset(ANI,group1%in%rownames(cladeA)&group2%in%rownames(cladeB))
+A_B_ANI$clade <- c('A vs B')
+
+
+A_C_ANI <- subset(ANI,group1%in%rownames(cladeA)&group2%in%rownames(cladeC))
+A_C_ANI$clade <- c('A vs C')
+
+A_D_ANI <- subset(ANI,group1%in%rownames(cladeA)&group2%in%rownames(cladeD))
+A_D_ANI$clade <- c('A vs D')
+
+B_C_ANI <- subset(ANI,group1%in%rownames(cladeB)&group2%in%rownames(cladeC))
+B_C_ANI$clade <- c('B vs C')
+
+
+B_D_ANI <- subset(ANI,group1%in%rownames(cladeB)&group2%in%rownames(cladeD))
+B_D_ANI$clade <- c('B vs D')
+
+C_D_ANI <- subset(ANI,group1%in%rownames(cladeC)&group2%in%rownames(cladeD))
+C_D_ANI$clade <- c('C vs D')
+
+
+
+ANI_6 <- rbind(A_B_ANI,A_C_ANI,A_D_ANI,B_C_ANI,B_D_ANI,C_D_ANI)
+
+
+
+ggplot(ANI_6,aes(x=clade,y=ANI,fill=clade)) +
+    geom_violin(trim=F,aes(fill=factor(clade),alpha=0.5)) +
+    geom_boxplot(width=0.2,position=position_dodge(0.8))+ 
+    theme_bw()+ 
+    theme(legend.position="none", 
+          strip.text = element_text(colour="black",size=14),
+          axis.text.x=element_text(colour="black",size=14), 
+          axis.text.y=element_text(size=14,colour="black"), 
+          axis.title.y=element_text(size = 14,vjust = 2), 
+          axis.title.x=element_text(size = 14), 
+          plot.title = element_text(size=16,face="bold",hjust = 0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank())+
+  ggtitle('ANI between the clades')+
+    ylab("ANI")+xlab("")+  
+    theme(panel.border = element_rect(size=1)) +
+    stat_compare_means(label = "p.signif",method = 'wilcox',
+                       comparisons = list(c('A vs B','A vs C'),c('A vs B','A vs D'),c('A vs D','B vs C'),c('B vs C','B vs D'),c('B vs D','C vs D')))
+
+
+
+```
+
+## Figure 3C
+
+```{r,echo=T,warning=FALSE}
+
+
+
+
+clades.tpm <- read.table('input/Prevotella_bins_52/bin_abundance_table.tab',header = T,row.names = 1,sep = '\t')
+
+
+
+clades.group <- read.csv('input/clades.group.txt.csv',header = T,row.names = 1)
+
+clades.group$id <- rownames(clades.group)
+
+clades.group.52 <- clades.group[rownames(clades.tpm),]
+
+  
+
+
+clades.tpm.1 <- aggregate(clades.tpm[,-1],list(clades.group.52$group),mean) 
+
+
+rownames(clades.tpm.1) <- clades.tpm.1$Group.1
+
+
+mean <- as.data.frame(colSums(clades.tpm.1[,-1]))
+
+
+
+
+
+clades.tpm.1 <- clades.tpm.1[,-1]
+clades.tpm.1 <- as.data.frame(t(clades.tpm.1))
+
+met <- read.csv('input/metadata_meta_107.csv',header = T,row.names = 2)
+met <- met[rownames(clades.tpm.1),]
+
+clades.tpm.1 <- cbind(met,clades.tpm.1)
+
+clades.tpm.1.long <- melt(clades.tpm.1)
+
+
+
+clades.tpm.1.long$relocation.years <- car::recode(clades.tpm.1.long$relocation.years,"'1M'='Baseline';'1Y'='Y1';'2Y'='Y2';")
+
+
+my_comparisons <- list(c("Baseline", "Y1"),c("Y1", "Y2"),c("Baseline", "2Y"))
+
+tibetan.clades.tpm.1.long <- subset(clades.tpm.1.long,national%in%'tibetan')
+
+tibetan.clades.tpm.1.long <- subset(tibetan.clades.tpm.1.long,value<80)
+tibetan.clades.tpm.2 <-subset(tibetan.clades.tpm.1.long,variable%in%'CladeA'&relocation.years=='Y2'&value<1)
+
+
+tibetan.clades.tpm.1.long <- tibetan.clades.tpm.1.long[-which(rownames(tibetan.clades.tpm.1.long)%in%rownames(tibetan.clades.tpm.2)),]
+
+ggplot(tibetan.clades.tpm.1.long,aes(x=relocation.years,y=value,fill=relocation.years)) +
+    geom_violin(trim=F,aes(fill=factor(relocation.years),alpha=0.5)) +
+    geom_boxplot(width=0.2,position=position_dodge(0.8))+ 
+    theme_bw()+
+    theme(legend.position="none", 
+          strip.text = element_text(colour="black",size=14),
+          axis.text.x=element_text(colour="black",size=14),
+          axis.text.y=element_text(size=14,colour="black"), 
+          axis.title.y=element_text(size = 14,vjust = 2), 
+          axis.title.x=element_text(size = 14), 
+          plot.title = element_text(size=16,face="bold",hjust = 0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank())+
+    ylab("Abundance \n (genome copies per million reads)")+xlab("")+  
+    theme(panel.border = element_rect(size=1)) +
+    stat_compare_means(label = "p.format",method = 'kruskal')+
+    facet_wrap(~variable,scales = 'free_y')+
+  ggsci::scale_color_npg(alpha = 0.8)+
+  ggsci::scale_fill_npg(alpha = 0.8)
+
+
+```
+
+
+
+## Figure 3D
+
+```{r,echo=T,warning=FALSE}
+
+
+clades.tpm <- read.table('input/bin_abundance_table.tab',header = T,row.names = 1,sep = '\t')
+
+
+
+
+clades.tpm.1 <- aggregate(clades.tpm[,-1],list(clades.tpm$clades),mean) 
+
+rownames(clades.tpm.1) <- clades.tpm.1$Group.1
+clades.tpm.1 <- clades.tpm.1[,-1]
+clades.tpm.1 <- as.data.frame(t(clades.tpm.1))
+
+met <- read.csv('input/metadata_meta_107.csv',header = T,row.names = 2)
+met <- met[rownames(clades.tpm.1),]
+
+clades.tpm.1 <- cbind(met,clades.tpm.1)
+
+clades.tpm.1.long <- melt(clades.tpm.1)
+
+clades.tpm.1$seq_ID <- rownames(clades.tpm.1)
+
+
+
+BC <- read.csv('input/blood biochemical indicators.csv',header=T,row.names=3)
+BC <- BC[,c(5,15:32)]
+BC$seq_ID <- rownames(BC)
+
+
+clades.tpm.2 <- merge(clades.tpm.1,BC,by='seq_ID')
+
+
+
+BI <- clades.tpm.2[,c(14:32)]
+rownames(BI) <- clades.tpm.2$seq_ID
+
+clades <- clades.tpm.2[,c(10:13)]
+rownames(clades) <- clades.tpm.2$seq_ID
+
+
+
+cor.p <- matrix(nrow=4,ncol=19)
+
+for(i in 1:19)
+  for (j in 1:4)
+{
+    {cor.p[j,i]<- cor.test(clades [,j],BI[,i],method = 'spearman')$p.value
+  }
+  }
+
+rownames(cor.p) <- colnames(clades )
+colnames(cor.p) <- colnames(BI)
+
+
+
+cor.r <- matrix(nrow=4,ncol=19)
+
+for(i in 1:19)
+  for (j in 1:4)
+{
+    {cor.r[j,i]<- cor.test(clades [,j],BI[,i],method = 'spearman')$estimate
+  }
+  }
+
+rownames(cor.r) <- colnames(clades )
+colnames(cor.r) <- colnames(BI)
+
+
+cor.r[cor.p>0.05|abs(cor.r)<0.2] = NA 
+
+
+
+cor.r.long <- melt(cor.r)
+cor.r.long <- na.omit(cor.r.long)
+
+
+
+mypal1 <- ggsci::pal_lancet( alpha = 0.7)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.5)(9)
+mypal3 <- ggsci::pal_jama( alpha = 0.6)(9)
+mypal4 <- ggsci::pal_aaas( alpha = 0.6)(9)
+
+
+cor.r.long <- cor.r.long[order(cor.r.long$Var1),]
+cor.r.long$Var2 <- as.character(cor.r.long$Var2)
+ 
+cor.r.long$Var2 <-  factor(cor.r.long$Var2,levels = c("BMI",'ALB','ALP','ALT','DBIL','TP','HDLC','TBIL','TG'))
+cor.r.long$Var1 <- as.factor(cor.r.long$Var1)
+
+grid.col = NULL
+grid.col[levels(cor.r.long$Var2)] = c(mypal4,mypal3,mypal1)
+grid.col[levels(cor.r.long$Var1)]= c(mypal2)
+
+
+
+
+col <- car::recode(cor.r.long$value," 0:1 ='red';else='blue'") # 
+
+
+par(cex=1.5) 
+chordDiagram(cor.r.long,
+             order = c('CladeB','CladeC','CladeD',
+               'ALB','ALP','ALT',"BMI",'DBIL','HDLC',
+                       'TP','TBIL','TG'),
+             grid.col=grid.col,
+             col=col,
+             annotationTrackHeight = c(0.1,0.2), 
+             directional=F, 
+             transparency=0.7)
+
+```
+
+
+## Figure 3E
+
+```{r,echo=T,warning=FALSE}
+
+
+tree=read.tree ("input/strainphlan/RAxML_bestTree.s__Prevotella_copri.StrainPhlAn3.tre") 
+
+data=fortify(tree)
+
+
+clades.group <- read.table('input/strainphlan/tree.group.txt',header = T,row.names = 1,sep = '\t')
+
+clades.group <- clades.group[data$label,]
+
+# clades.group$group <- car::recode(clades.group$group,"'1M'='Baseline';'1Y'='Y1';'2Y'='Y2'")
+
+metadata <- clades.group
+metadata$label <- row.names(metadata)
+
+met <- na.omit(metadata)
+
+
+
+tree_x <- as_tibble(tree)
+tree_y <- full_join(tree_x,met,by="label")  
+
+
+
+
+
+tree_group <- as.treedata(tree_y)  
+
+label <- na.omit(tree_y$label)
+
+
+
+
+
+ggtree(tree_group, layout="rectangular", size=1) +
+  geom_tiplab(aes(label=NA),size=3, hjust=-0.05) +
+  geom_tippoint(aes(color=group),size=2)+
+  ggsci::scale_color_lancet()+
+   theme(legend.position="right", 
+          legend.title = element_blank(),
+          legend.text = element_text(colour="black",size=14),
+          plot.title = element_text(size=16,face="bold",hjust = 0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank())+
+    ylab("")+xlab("") 
+
+
+
+num <- data.frame('tibetan_1M'=c(10,6),
+                  'tibetan_1Y'=c(14,15),
+                  'tibetan_2Y'=c(7,21))
+
+rownames(num) <- c('CladeA_like','CladeA')
+
+fisher.test(num)
+
+
+```
+
+## Figure 3F
+
+```{r,echo=T}
+
+mutation <-read.table('input/strainphlan/s__Prevotella_copri.mutation',sep='\t',header = T,row.names = 1)
+colnames(mutation) <- rownames(mutation)
+mutation <- as.matrix(mutation)
+mutation[lower.tri(mutation)] <- NA     
+mutation1 <- melt(mutation)
+mutation1 <- na.omit(mutation1)
+
+
+clades.group <- read.table('input/strainphlan/tree.group.txt',header = T,row.names = 1,sep = '\t')
+clades.group$ID.1 <- rownames(clades.group)
+
+
+
+colnames(mutation1) <- c('ID.1','ID.2','mutation')
+
+
+mutation1 <- merge(mutation1,clades.group,by='ID.1')
+
+
+
+group1 <- subset(clades.group,clades.group$group%in%c('1M','1Y','2Y'))
+
+mutation3 <- mutation1[mutation1$ID.2%in%rownames(group1),]
+
+met <- read.csv('input/metadata_meta_107.csv',header = T)
+met$ID.2 <- met$seq_ID
+
+mutation3 <- merge(met,mutation3,by='ID.2')
+mutation3 <- subset(mutation3,mutation3$group.y%in%c('CladeA','CladeB','CladeC','CladeD'))
+mutation3 <- subset(mutation3,national%in%'tibetan')
+
+mutation3$mutation <- as.numeric(mutation3$mutation)
+
+
+
+
+ggplot(mutation3,aes(x=mutation3$relocation.years,y=mutation*100,fill=relocation.years)) +
+  facet_wrap(~group.y,scales = 'free_y')+
+    geom_violin(trim=F,aes(fill=factor(relocation.years),alpha=0.5)) +
+    geom_boxplot(width=0.2,position=position_dodge(0.8))+ 
+    theme_bw()+ 
+    theme(legend.position="none",
+          strip.text = element_text(colour="black",size=14),
+          axis.text.x=element_text(colour="black",size=14), 
+          axis.text.y=element_text(size=14,colour="black"), 
+          axis.title.y=element_text(size = 14,vjust = 2), 
+          axis.title.x=element_text(size = 14), 
+          plot.title = element_text(size=14,face="bold",hjust = 0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank())+
+  ggtitle('Mutation between sample-specific P.copri and clades')+
+    ylab("Mutation(%)")+xlab("")+ 
+    theme(panel.border = element_rect(size=1)) +
+  stat_compare_means(method = 'kruskal',label = "p.format")+
+  ggsci::scale_color_npg(alpha = 0.8)+
+  ggsci::scale_fill_npg(alpha = 0.8)
+
+
+```
