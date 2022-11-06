@@ -3,15 +3,18 @@
 
 ## Deoxyadenosine kinase-mediated DNA salvage synthesis assists Prevotella copri to secure privileged intestinal colonization
 
-Context:
+### Context:
 
-bash: bash scripts used to reproduce all processing results from raw data.
+bash: bash scripts used to reproduce all processing results from raw sequencing data.
 
 R.code: R scripts used to reproduce all statistical results and visualized pictures.
 
 Source Data: Including species feature table of and subject's metadata.
 
-Processiong Data:
+Supplementary tables: Supplementary tables in the article.
+
+
+### Processiong Data:
 
 Figure 2. P. copri dominated the symbiotic community and maintained a continuous colonization advantage in a 2-year cohort.
 
@@ -30,7 +33,7 @@ Figure 8. P. copri clade A gradually became the dominant clade during host migra
 
 
 
-Data Availability:
+### Data Availability:
 The raw 16S rRNA gene and metagenomic sequencing data used in the present study have been deposited in the NCBI database under project ID PRJNA778894.
 
 For any other code/analysis inquiries, please open a github issue.
