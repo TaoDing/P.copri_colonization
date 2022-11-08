@@ -5,7 +5,7 @@
 
 ### Context:
 
-bash: bash scripts used to reproduce all tables that be used for downstream R analysis.
+bash: bash scripts used to reproduce all tables that would be used for downstream R analysis.
 
 R.code: R scripts used to reproduce all statistical results and visualized pictures.
 
