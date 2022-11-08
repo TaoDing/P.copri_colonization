@@ -1,0 +1,685 @@
+,Group,Species,Species1,OD600,Incubation time,Date,PCS
+PO,P.oralis,P.oralis,Prevotella oralis,0.064,0,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.068,0,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.06,0,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.07,0,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.065,0,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.068,0,2022/1/1,No
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.073,0,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.064,0,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.068,0,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.078,0,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.07,0,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.069,0,2022/1/1,Yes
+PO,P.oralis,P.oralis,Prevotella oralis,0.062,6,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.065,6,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.065,6,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.059,6,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.063,6,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.056,6,2022/1/1,No
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.061,6,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.057,6,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.062,6,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.064,6,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.063,6,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.065,6,2022/1/1,Yes
+PO,P.oralis,P.oralis,Prevotella oralis,0.068,12,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.072,12,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.067,12,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.07,12,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.063,12,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.072,12,2022/1/1,No
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.067,12,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.061,12,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.069,12,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.067,12,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.068,12,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.074,12,2022/1/1,Yes
+PO,P.oralis,P.oralis,Prevotella oralis,0.075,24,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.096,24,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.067,24,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.067,24,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.088,24,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.084,24,2022/1/1,No
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.35,24,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.361,24,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.062,24,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.087,24,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.433,24,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.097,24,2022/1/1,Yes
+PO,P.oralis,P.oralis,Prevotella oralis,0.361,36,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.119,36,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.293,36,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.179,36,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.063,36,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.146,36,2022/1/1,No
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.68,36,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.619,36,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.109,36,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.147,36,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.371,36,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.324,36,2022/1/1,Yes
+PO,P.oralis,P.oralis,Prevotella oralis,0.58,60,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.269,60,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.427,60,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.566,60,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.145,60,2022/1/1,No
+PO,P.oralis,P.oralis,Prevotella oralis,0.426,60,2022/1/1,No
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.513,60,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.364,60,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.448,60,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.29,60,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.475,60,2022/1/1,Yes
+PO+PCS,P.oralis+P.copri sup,P.oralis,Prevotella oralis,0.464,60,2022/1/1,Yes
+BP1,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0800,0,2022/1/1,No
+BP2,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0810,0,2022/1/1,No
+BP3,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0800,0,2022/1/1,No
+BP4,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0750,0,2022/1/1,No
+BP5,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0920,0,2022/1/1,No
+BP6,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0740,0,2022/1/1,No
+BP+PCS1,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0690,0,2022/1/1,Yes
+BP+PCS2,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0610,0,2022/1/1,Yes
+BP+PCS3,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0610,0,2022/1/1,Yes
+BP+PCS4,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0720,0,2022/1/1,Yes
+BP+PCS5,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0610,0,2022/1/1,Yes
+BP+PCS6,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0610,0,2022/1/1,Yes
+BP1,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0730,6,2022/1/1,No
+BP2,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0730,6,2022/1/1,No
+BP3,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0720,6,2022/1/1,No
+BP4,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0720,6,2022/1/1,No
+BP5,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0720,6,2022/1/1,No
+BP6,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0770,6,2022/1/1,No
+BP+PCS1,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0730,6,2022/1/1,Yes
+BP+PCS2,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.1130,6,2022/1/1,Yes
+BP+PCS3,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0590,6,2022/1/1,Yes
+BP+PCS4,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0710,6,2022/1/1,Yes
+BP+PCS5,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.1110,6,2022/1/1,Yes
+BP+PCS6,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0580,6,2022/1/1,Yes
+BP1,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0750,12,2022/1/1,No
+BP2,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0740,12,2022/1/1,No
+BP3,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0740,12,2022/1/1,No
+BP4,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0730,12,2022/1/1,No
+BP5,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0770,12,2022/1/1,No
+BP6,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0750,12,2022/1/1,No
+BP+PCS1,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.1580,12,2022/1/1,Yes
+BP+PCS2,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.2890,12,2022/1/1,Yes
+BP+PCS3,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0580,12,2022/1/1,Yes
+BP+PCS4,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.1560,12,2022/1/1,Yes
+BP+PCS5,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.2860,12,2022/1/1,Yes
+BP+PCS6,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.0570,12,2022/1/1,Yes
+BP1,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.8280,24,2022/1/1,No
+BP2,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.7940,24,2022/1/1,No
+BP3,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.8140,24,2022/1/1,No
+BP4,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.7770,24,2022/1/1,No
+BP5,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.7460,24,2022/1/1,No
+BP6,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.7510,24,2022/1/1,No
+BP+PCS1,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4380,24,2022/1/1,Yes
+BP+PCS2,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.3910,24,2022/1/1,Yes
+BP+PCS3,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.3740,24,2022/1/1,Yes
+BP+PCS4,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4470,24,2022/1/1,Yes
+BP+PCS5,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4040,24,2022/1/1,Yes
+BP+PCS6,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.3750,24,2022/1/1,Yes
+BP1,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.8380,36,2022/1/1,No
+BP2,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.8020,36,2022/1/1,No
+BP3,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.8150,36,2022/1/1,No
+BP4,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.7260,36,2022/1/1,No
+BP5,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.7980,36,2022/1/1,No
+BP6,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.7550,36,2022/1/1,No
+BP+PCS1,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4240,36,2022/1/1,Yes
+BP+PCS2,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.3950,36,2022/1/1,Yes
+BP+PCS3,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.5520,36,2022/1/1,Yes
+BP+PCS4,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4400,36,2022/1/1,Yes
+BP+PCS5,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.3990,36,2022/1/1,Yes
+BP+PCS6,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.5560,36,2022/1/1,Yes
+BP1,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4930,60,2022/1/1,No
+BP2,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.5400,60,2022/1/1,No
+BP3,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.5730,60,2022/1/1,No
+BP4,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.5170,60,2022/1/1,No
+BP5,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.5580,60,2022/1/1,No
+BP6,B. pseudocatenulatum,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.5920,60,2022/1/1,No
+BP+PCS1,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4250,60,2022/1/1,Yes
+BP+PCS2,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4440,60,2022/1/1,Yes
+BP+PCS3,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.3380,60,2022/1/1,Yes
+BP+PCS4,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.3450,60,2022/1/1,Yes
+BP+PCS5,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4160,60,2022/1/1,Yes
+BP+PCS6,B. pseudocatenulatum+P.copri sup,B. pseudocatenulatum,Bifidobacterium pseudocatenulatum,0.4210,60,2022/1/1,Yes
+LS1,L.salivarius,L.salivarius,Lactobacillus salivarius,0.0730,0,2022/1/1,No
+LS2,L.salivarius,L.salivarius,Lactobacillus salivarius,0.0840,0,2022/1/1,No
+LS3,L.salivarius,L.salivarius,Lactobacillus salivarius,0.0640,0,2022/1/1,No
+LS4,L.salivarius,L.salivarius,Lactobacillus salivarius,0.0750,0,2022/1/1,No
+LS5,L.salivarius,L.salivarius,Lactobacillus salivarius,0.0730,0,2022/1/1,No
+LS6,L.salivarius,L.salivarius,Lactobacillus salivarius,0.0630,0,2022/1/1,No
+LS+PCS1,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0700,0,2022/1/1,Yes
+LS+PCS2,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0570,0,2022/1/1,Yes
+LS+PCS3,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0710,0,2022/1/1,Yes
+LS+PCS4,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0700,0,2022/1/1,Yes
+LS+PCS5,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0570,0,2022/1/1,Yes
+LS+PCS6,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0710,0,2022/1/1,Yes
+LS1,L.salivarius,L.salivarius,Lactobacillus salivarius,0.1380,6,2022/1/1,No
+LS2,L.salivarius,L.salivarius,Lactobacillus salivarius,0.1880,6,2022/1/1,No
+LS3,L.salivarius,L.salivarius,Lactobacillus salivarius,0.1240,6,2022/1/1,No
+LS4,L.salivarius,L.salivarius,Lactobacillus salivarius,0.2480,6,2022/1/1,No
+LS5,L.salivarius,L.salivarius,Lactobacillus salivarius,0.2300,6,2022/1/1,No
+LS6,L.salivarius,L.salivarius,Lactobacillus salivarius,0.1130,6,2022/1/1,No
+LS+PCS1,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0680,6,2022/1/1,Yes
+LS+PCS2,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0920,6,2022/1/1,Yes
+LS+PCS3,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0740,6,2022/1/1,Yes
+LS+PCS4,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0680,6,2022/1/1,Yes
+LS+PCS5,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0920,6,2022/1/1,Yes
+LS+PCS6,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0730,6,2022/1/1,Yes
+LS1,L.salivarius,L.salivarius,Lactobacillus salivarius,0.4810,12,2022/1/1,No
+LS2,L.salivarius,L.salivarius,Lactobacillus salivarius,0.4180,12,2022/1/1,No
+LS3,L.salivarius,L.salivarius,Lactobacillus salivarius,0.4050,12,2022/1/1,No
+LS4,L.salivarius,L.salivarius,Lactobacillus salivarius,0.5510,12,2022/1/1,No
+LS5,L.salivarius,L.salivarius,Lactobacillus salivarius,0.5090,12,2022/1/1,No
+LS6,L.salivarius,L.salivarius,Lactobacillus salivarius,0.3470,12,2022/1/1,No
+LS+PCS1,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.1760,12,2022/1/1,Yes
+LS+PCS2,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.1750,12,2022/1/1,Yes
+LS+PCS3,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0860,12,2022/1/1,Yes
+LS+PCS4,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.1730,12,2022/1/1,Yes
+LS+PCS5,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.1790,12,2022/1/1,Yes
+LS+PCS6,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.0870,12,2022/1/1,Yes
+LS1,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6010,24,2022/1/1,No
+LS2,L.salivarius,L.salivarius,Lactobacillus salivarius,0.5520,24,2022/1/1,No
+LS3,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6070,24,2022/1/1,No
+LS4,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6260,24,2022/1/1,No
+LS5,L.salivarius,L.salivarius,Lactobacillus salivarius,0.5800,24,2022/1/1,No
+LS6,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6030,24,2022/1/1,No
+LS+PCS1,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.6090,24,2022/1/1,Yes
+LS+PCS2,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5140,24,2022/1/1,Yes
+LS+PCS3,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.4950,24,2022/1/1,Yes
+LS+PCS4,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5990,24,2022/1/1,Yes
+LS+PCS5,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5180,24,2022/1/1,Yes
+LS+PCS6,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5010,24,2022/1/1,Yes
+LS1,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6510,36,2022/1/1,No
+LS2,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6230,36,2022/1/1,No
+LS3,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6050,36,2022/1/1,No
+LS4,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6060,36,2022/1/1,No
+LS5,L.salivarius,L.salivarius,Lactobacillus salivarius,0.5890,36,2022/1/1,No
+LS6,L.salivarius,L.salivarius,Lactobacillus salivarius,0.5820,36,2022/1/1,No
+LS+PCS1,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5720,36,2022/1/1,Yes
+LS+PCS2,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5160,36,2022/1/1,Yes
+LS+PCS3,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.4640,36,2022/1/1,Yes
+LS+PCS4,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5800,36,2022/1/1,Yes
+LS+PCS5,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5140,36,2022/1/1,Yes
+LS+PCS6,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.4850,36,2022/1/1,Yes
+LS1,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6010,60,2022/1/1,No
+LS2,L.salivarius,L.salivarius,Lactobacillus salivarius,0.7290,60,2022/1/1,No
+LS3,L.salivarius,L.salivarius,Lactobacillus salivarius,0.6790,60,2022/1/1,No
+LS4,L.salivarius,L.salivarius,Lactobacillus salivarius,0.5770,60,2022/1/1,No
+LS5,L.salivarius,L.salivarius,Lactobacillus salivarius,0.7120,60,2022/1/1,No
+LS6,L.salivarius,L.salivarius,Lactobacillus salivarius,0.7420,60,2022/1/1,No
+LS+PCS1,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5160,60,2022/1/1,Yes
+LS+PCS2,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.5350,60,2022/1/1,Yes
+LS+PCS3,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.4730,60,2022/1/1,Yes
+LS+PCS4,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.4830,60,2022/1/1,Yes
+LS+PCS5,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.3970,60,2022/1/1,Yes
+LS+PCS6,L.salivarius+P.copri sup,L.salivarius,Lactobacillus salivarius,0.4200,60,2022/1/1,Yes
+BV1,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0770,0,2022/1/1,No
+BV2,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0820,0,2022/1/1,No
+BV3,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0640,0,2022/1/1,No
+BV4,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0730,0,2022/1/1,No
+BV5,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0730,0,2022/1/1,No
+BV6,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0740,0,2022/1/1,No
+BV+PCS1,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0690,0,2022/1/1,Yes
+BV+PCS2,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0620,0,2022/1/1,Yes
+BV+PCS3,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0590,0,2022/1/1,Yes
+BV+PCS4,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0690,0,2022/1/1,Yes
+BV+PCS5,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0620,0,2022/1/1,Yes
+BV+PCS6,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0590,0,2022/1/1,Yes
+BV1,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1130,6,2022/1/1,No
+BV2,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1170,6,2022/1/1,No
+BV3,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0960,6,2022/1/1,No
+BV4,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0980,6,2022/1/1,No
+BV5,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.0950,6,2022/1/1,No
+BV6,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1050,6,2022/1/1,No
+BV+PCS1,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0600,6,2022/1/1,Yes
+BV+PCS2,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0620,6,2022/1/1,Yes
+BV+PCS3,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0710,6,2022/1/1,Yes
+BV+PCS4,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0600,6,2022/1/1,Yes
+BV+PCS5,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0620,6,2022/1/1,Yes
+BV+PCS6,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0710,6,2022/1/1,Yes
+BV1,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1770,12,2022/1/1,No
+BV2,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1750,12,2022/1/1,No
+BV3,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1610,12,2022/1/1,No
+BV4,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1520,12,2022/1/1,No
+BV5,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1420,12,2022/1/1,No
+BV6,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.1600,12,2022/1/1,No
+BV+PCS1,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0920,12,2022/1/1,Yes
+BV+PCS2,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0730,12,2022/1/1,Yes
+BV+PCS3,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0630,12,2022/1/1,Yes
+BV+PCS4,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0910,12,2022/1/1,Yes
+BV+PCS5,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0720,12,2022/1/1,Yes
+BV+PCS6,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.0620,12,2022/1/1,Yes
+BV1,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.7870,24,2022/1/1,No
+BV2,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.7200,24,2022/1/1,No
+BV3,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.7090,24,2022/1/1,No
+BV4,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.3610,24,2022/1/1,No
+BV5,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6170,24,2022/1/1,No
+BV6,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6430,24,2022/1/1,No
+BV+PCS1,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.1520,24,2022/1/1,Yes
+BV+PCS2,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2260,24,2022/1/1,Yes
+BV+PCS3,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2490,24,2022/1/1,Yes
+BV+PCS4,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.1580,24,2022/1/1,Yes
+BV+PCS5,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2280,24,2022/1/1,Yes
+BV+PCS6,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2440,24,2022/1/1,Yes
+BV1,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6960,36,2022/1/1,No
+BV2,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6950,36,2022/1/1,No
+BV3,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6720,36,2022/1/1,No
+BV4,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6390,36,2022/1/1,No
+BV5,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6430,36,2022/1/1,No
+BV6,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6630,36,2022/1/1,No
+BV+PCS1,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2140,36,2022/1/1,Yes
+BV+PCS2,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2040,36,2022/1/1,Yes
+BV+PCS3,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2720,36,2022/1/1,Yes
+BV+PCS4,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2110,36,2022/1/1,Yes
+BV+PCS5,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2170,36,2022/1/1,Yes
+BV+PCS6,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2500,36,2022/1/1,Yes
+BV1,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6060,60,2022/1/1,No
+BV2,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.5750,60,2022/1/1,No
+BV3,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.7570,60,2022/1/1,No
+BV4,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6630,60,2022/1/1,No
+BV5,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.7040,60,2022/1/1,No
+BV6,B.vulgatus,B.vulgatus,Bacteroides vulgatus,0.6050,60,2022/1/1,No
+BV+PCS1,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.5710,60,2022/1/1,Yes
+BV+PCS2,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.5770,60,2022/1/1,Yes
+BV+PCS3,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2270,60,2022/1/1,Yes
+BV+PCS4,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2400,60,2022/1/1,Yes
+BV+PCS5,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2590,60,2022/1/1,Yes
+BV+PCS6,B.vulgatus+P.copri sup,B.vulgatus,Bacteroides vulgatus,0.2490,60,2022/1/1,Yes
+CRZA1,FecesA,FecesA,CRZ fecesA,0.0710,0,2022/1/1,No
+CRZA2,FecesA,FecesA,CRZ fecesA,0.0680,0,2022/1/1,No
+CRZA3,FecesA,FecesA,CRZ fecesA,0.0640,0,2022/1/1,No
+CRZA4,FecesA,FecesA,CRZ fecesA,0.0650,0,2022/1/1,No
+CRZA5,FecesA,FecesA,CRZ fecesA,0.0670,0,2022/1/1,No
+CRZA6,FecesA,FecesA,CRZ fecesA,0.0540,0,2022/1/1,No
+CRZA+PCS1,FecesA+P.copri sup,FecesA,CRZ fecesA,0.0640,0,2022/1/1,Yes
+CRZA+PCS2,FecesA+P.copri sup,FecesA,CRZ fecesA,0.0580,0,2022/1/1,Yes
+CRZA+PCS3,FecesA+P.copri sup,FecesA,CRZ fecesA,0.0650,0,2022/1/1,Yes
+CRZA+PCS4,FecesA+P.copri sup,FecesA,CRZ fecesA,0.0660,0,2022/1/1,Yes
+CRZA+PCS5,FecesA+P.copri sup,FecesA,CRZ fecesA,0.0650,0,2022/1/1,Yes
+CRZA+PCS6,FecesA+P.copri sup,FecesA,CRZ fecesA,0.0640,0,2022/1/1,Yes
+CRZA1,FecesA,FecesA,CRZ fecesA,0.2870,6,2022/1/1,No
+CRZA2,FecesA,FecesA,CRZ fecesA,0.2870,6,2022/1/1,No
+CRZA3,FecesA,FecesA,CRZ fecesA,0.3030,6,2022/1/1,No
+CRZA4,FecesA,FecesA,CRZ fecesA,0.2410,6,2022/1/1,No
+CRZA5,FecesA,FecesA,CRZ fecesA,0.2520,6,2022/1/1,No
+CRZA6,FecesA,FecesA,CRZ fecesA,0.2420,6,2022/1/1,No
+CRZA+PCS1,FecesA+P.copri sup,FecesA,CRZ fecesA,0.0800,6,2022/1/1,Yes
+CRZA+PCS2,FecesA+P.copri sup,FecesA,CRZ fecesA,0.1410,6,2022/1/1,Yes
+CRZA+PCS3,FecesA+P.copri sup,FecesA,CRZ fecesA,0.0990,6,2022/1/1,Yes
+CRZA+PCS4,FecesA+P.copri sup,FecesA,CRZ fecesA,0.1040,6,2022/1/1,Yes
+CRZA+PCS5,FecesA+P.copri sup,FecesA,CRZ fecesA,0.1140,6,2022/1/1,Yes
+CRZA+PCS6,FecesA+P.copri sup,FecesA,CRZ fecesA,0.1340,6,2022/1/1,Yes
+CRZA1,FecesA,FecesA,CRZ fecesA,0.7740,12,2022/1/1,No
+CRZA2,FecesA,FecesA,CRZ fecesA,0.7850,12,2022/1/1,No
+CRZA3,FecesA,FecesA,CRZ fecesA,0.7710,12,2022/1/1,No
+CRZA4,FecesA,FecesA,CRZ fecesA,0.7220,12,2022/1/1,No
+CRZA5,FecesA,FecesA,CRZ fecesA,0.7310,12,2022/1/1,No
+CRZA6,FecesA,FecesA,CRZ fecesA,0.7350,12,2022/1/1,No
+CRZA+PCS1,FecesA+P.copri sup,FecesA,CRZ fecesA,0.2820,12,2022/1/1,Yes
+CRZA+PCS2,FecesA+P.copri sup,FecesA,CRZ fecesA,0.6240,12,2022/1/1,Yes
+CRZA+PCS3,FecesA+P.copri sup,FecesA,CRZ fecesA,0.3540,12,2022/1/1,Yes
+CRZA+PCS4,FecesA+P.copri sup,FecesA,CRZ fecesA,0.4480,12,2022/1/1,Yes
+CRZA+PCS5,FecesA+P.copri sup,FecesA,CRZ fecesA,0.4690,12,2022/1/1,Yes
+CRZA+PCS6,FecesA+P.copri sup,FecesA,CRZ fecesA,0.5850,12,2022/1/1,Yes
+CRZA1,FecesA,FecesA,CRZ fecesA,0.7140,24,2022/1/1,No
+CRZA2,FecesA,FecesA,CRZ fecesA,0.7220,24,2022/1/1,No
+CRZA3,FecesA,FecesA,CRZ fecesA,0.6540,24,2022/1/1,No
+CRZA4,FecesA,FecesA,CRZ fecesA,0.6730,24,2022/1/1,No
+CRZA5,FecesA,FecesA,CRZ fecesA,0.6650,24,2022/1/1,No
+CRZA6,FecesA,FecesA,CRZ fecesA,0.6790,24,2022/1/1,No
+CRZA+PCS1,FecesA+P.copri sup,FecesA,CRZ fecesA,0.8170,24,2022/1/1,Yes
+CRZA+PCS2,FecesA+P.copri sup,FecesA,CRZ fecesA,0.8500,24,2022/1/1,Yes
+CRZA+PCS3,FecesA+P.copri sup,FecesA,CRZ fecesA,0.7680,24,2022/1/1,Yes
+CRZA+PCS4,FecesA+P.copri sup,FecesA,CRZ fecesA,0.9280,24,2022/1/1,Yes
+CRZA+PCS5,FecesA+P.copri sup,FecesA,CRZ fecesA,0.8860,24,2022/1/1,Yes
+CRZA+PCS6,FecesA+P.copri sup,FecesA,CRZ fecesA,0.7120,24,2022/1/1,Yes
+CRZA1,FecesA,FecesA,CRZ fecesA,0.7750,36,2022/1/1,No
+CRZA2,FecesA,FecesA,CRZ fecesA,0.6960,36,2022/1/1,No
+CRZA3,FecesA,FecesA,CRZ fecesA,0.6580,36,2022/1/1,No
+CRZA4,FecesA,FecesA,CRZ fecesA,0.6560,36,2022/1/1,No
+CRZA5,FecesA,FecesA,CRZ fecesA,0.6460,36,2022/1/1,No
+CRZA6,FecesA,FecesA,CRZ fecesA,0.6420,36,2022/1/1,No
+CRZA+PCS1,FecesA+P.copri sup,FecesA,CRZ fecesA,0.8260,36,2022/1/1,Yes
+CRZA+PCS2,FecesA+P.copri sup,FecesA,CRZ fecesA,0.7780,36,2022/1/1,Yes
+CRZA+PCS3,FecesA+P.copri sup,FecesA,CRZ fecesA,0.8390,36,2022/1/1,Yes
+CRZA+PCS4,FecesA+P.copri sup,FecesA,CRZ fecesA,0.9700,36,2022/1/1,Yes
+CRZA+PCS5,FecesA+P.copri sup,FecesA,CRZ fecesA,0.9780,36,2022/1/1,Yes
+CRZA+PCS6,FecesA+P.copri sup,FecesA,CRZ fecesA,0.7320,36,2022/1/1,Yes
+CRZA1,FecesA,FecesA,CRZ fecesA,0.7730,60,2022/1/1,No
+CRZA2,FecesA,FecesA,CRZ fecesA,0.7830,60,2022/1/1,No
+CRZA3,FecesA,FecesA,CRZ fecesA,0.7590,60,2022/1/1,No
+CRZA4,FecesA,FecesA,CRZ fecesA,0.6660,60,2022/1/1,No
+CRZA5,FecesA,FecesA,CRZ fecesA,0.7220,60,2022/1/1,No
+CRZA6,FecesA,FecesA,CRZ fecesA,0.6600,60,2022/1/1,No
+CRZA+PCS1,FecesA+P.copri sup,FecesA,CRZ fecesA,0.6870,60,2022/1/1,Yes
+CRZA+PCS2,FecesA+P.copri sup,FecesA,CRZ fecesA,0.7310,60,2022/1/1,Yes
+CRZA+PCS3,FecesA+P.copri sup,FecesA,CRZ fecesA,0.6390,60,2022/1/1,Yes
+CRZA+PCS4,FecesA+P.copri sup,FecesA,CRZ fecesA,0.7660,60,2022/1/1,Yes
+CRZA+PCS5,FecesA+P.copri sup,FecesA,CRZ fecesA,0.7520,60,2022/1/1,Yes
+CRZA+PCS6,FecesA+P.copri sup,FecesA,CRZ fecesA,0.6250,60,2022/1/1,Yes
+Negative,Negative,Negative,Negative,0.0600,0,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0620,0,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0590,0,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0570,0,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0610,0,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0620,0,2022/1/1,No
+Negative,Negative+P.copri sup,Negative,Negative,0.0620,0,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0580,0,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0590,0,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0580,0,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0570,0,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0580,0,2022/1/1,Yes
+Negative,Negative,Negative,Negative,0.0650,6,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0630,6,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0610,6,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0600,6,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0610,6,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0630,6,2022/1/1,No
+Negative,Negative+P.copri sup,Negative,Negative,0.0600,6,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0590,6,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0620,6,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0570,6,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0570,6,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0620,6,2022/1/1,Yes
+Negative,Negative,Negative,Negative,0.0650,12,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0640,12,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0680,12,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0610,12,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0610,12,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0600,12,2022/1/1,No
+Negative,Negative+P.copri sup,Negative,Negative,0.0630,12,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0570,12,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0610,12,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0620,12,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0590,12,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0620,12,2022/1/1,Yes
+Negative,Negative,Negative,Negative,0.0570,24,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0590,24,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0540,24,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0520,24,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0550,24,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0500,24,2022/1/1,No
+Negative,Negative+P.copri sup,Negative,Negative,0.0510,24,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0490,24,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0570,24,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0560,24,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0520,24,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0600,24,2022/1/1,Yes
+Negative,Negative,Negative,Negative,0.0580,36,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0600,36,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0560,36,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0570,36,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0550,36,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0610,36,2022/1/1,No
+Negative,Negative+P.copri sup,Negative,Negative,0.0540,36,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0520,36,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0560,36,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0570,36,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0510,36,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0550,36,2022/1/1,Yes
+Negative,Negative,Negative,Negative,0.0650,60,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0680,60,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0640,60,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0620,60,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0640,60,2022/1/1,No
+Negative,Negative,Negative,Negative,0.0630,60,2022/1/1,No
+Negative,Negative+P.copri sup,Negative,Negative,0.0640,60,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0620,60,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0640,60,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0640,60,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0640,60,2022/1/1,Yes
+Negative,Negative+P.copri sup,Negative,Negative,0.0670,60,2022/1/1,Yes
+B.ovatus-1,B.ovatus,B.ovatus,Bacteroides ovatus,0.078,0,2021/12/16,No
+B.ovatus-2,B.ovatus,B.ovatus,Bacteroides ovatus,0.075,0,2021/12/16,No
+B.ovatus-3,B.ovatus,B.ovatus,Bacteroides ovatus,0.07,0,2021/12/16,No
+B.ovatus-4,B.ovatus,B.ovatus,Bacteroides ovatus,0.064,0,2021/12/16,No
+B.ovatus-5,B.ovatus,B.ovatus,Bacteroides ovatus,0.073,0,2021/12/16,No
+B.ovatus-6,B.ovatus,B.ovatus,Bacteroides ovatus,0.071,0,2021/12/16,No
+B.ovatus-1,B.ovatus,B.ovatus,Bacteroides ovatus,0.229,6,2021/12/16,No
+B.ovatus-2,B.ovatus,B.ovatus,Bacteroides ovatus,0.228,6,2021/12/16,No
+B.ovatus-3,B.ovatus,B.ovatus,Bacteroides ovatus,0.163,6,2021/12/16,No
+B.ovatus-4,B.ovatus,B.ovatus,Bacteroides ovatus,0.173,6,2021/12/16,No
+B.ovatus-5,B.ovatus,B.ovatus,Bacteroides ovatus,0.204,6,2021/12/16,No
+B.ovatus-6,B.ovatus,B.ovatus,Bacteroides ovatus,0.218,6,2021/12/16,No
+B.ovatus-1,B.ovatus,B.ovatus,Bacteroides ovatus,0.382,12,2021/12/16,No
+B.ovatus-2,B.ovatus,B.ovatus,Bacteroides ovatus,0.343,12,2021/12/16,No
+B.ovatus-3,B.ovatus,B.ovatus,Bacteroides ovatus,0.35,12,2021/12/16,No
+B.ovatus-4,B.ovatus,B.ovatus,Bacteroides ovatus,0.309,12,2021/12/16,No
+B.ovatus-5,B.ovatus,B.ovatus,Bacteroides ovatus,0.258,12,2021/12/16,No
+B.ovatus-6,B.ovatus,B.ovatus,Bacteroides ovatus,0.246,12,2021/12/16,No
+B.ovatus-1,B.ovatus,B.ovatus,Bacteroides ovatus,0.465,24,2021/12/16,No
+B.ovatus-2,B.ovatus,B.ovatus,Bacteroides ovatus,0.47,24,2021/12/16,No
+B.ovatus-3,B.ovatus,B.ovatus,Bacteroides ovatus,0.76,24,2021/12/16,No
+B.ovatus-4,B.ovatus,B.ovatus,Bacteroides ovatus,0.77,24,2021/12/16,No
+B.ovatus-5,B.ovatus,B.ovatus,Bacteroides ovatus,0.473,24,2021/12/16,No
+B.ovatus-6,B.ovatus,B.ovatus,Bacteroides ovatus,0.472,24,2021/12/16,No
+B.ovatus-1,B.ovatus,B.ovatus,Bacteroides ovatus,0.413,36,2021/12/16,No
+B.ovatus-2,B.ovatus,B.ovatus,Bacteroides ovatus,0.386,36,2021/12/16,No
+B.ovatus-3,B.ovatus,B.ovatus,Bacteroides ovatus,0.38,36,2021/12/16,No
+B.ovatus-4,B.ovatus,B.ovatus,Bacteroides ovatus,0.4,36,2021/12/16,No
+B.ovatus-5,B.ovatus,B.ovatus,Bacteroides ovatus,0.755,36,2021/12/16,No
+B.ovatus-6,B.ovatus,B.ovatus,Bacteroides ovatus,0.673,36,2021/12/16,No
+B.ovatus-1,B.ovatus,B.ovatus,Bacteroides ovatus,0.352,48,2021/12/16,No
+B.ovatus-2,B.ovatus,B.ovatus,Bacteroides ovatus,0.333,48,2021/12/16,No
+B.ovatus-3,B.ovatus,B.ovatus,Bacteroides ovatus,0.311,48,2021/12/16,No
+B.ovatus-4,B.ovatus,B.ovatus,Bacteroides ovatus,0.303,48,2021/12/16,No
+B.ovatus-5,B.ovatus,B.ovatus,Bacteroides ovatus,0.669,48,2021/12/16,No
+B.ovatus-6,B.ovatus,B.ovatus,Bacteroides ovatus,0.628,48,2021/12/16,No
+B.ovatus-1,B.ovatus,B.ovatus,Bacteroides ovatus,0.289,60,2021/12/16,No
+B.ovatus-2,B.ovatus,B.ovatus,Bacteroides ovatus,0.3,60,2021/12/16,No
+B.ovatus-3,B.ovatus,B.ovatus,Bacteroides ovatus,0.264,60,2021/12/16,No
+B.ovatus-4,B.ovatus,B.ovatus,Bacteroides ovatus,0.267,60,2021/12/16,No
+B.ovatus-5,B.ovatus,B.ovatus,Bacteroides ovatus,0.54,60,2021/12/16,No
+B.ovatus-6,B.ovatus,B.ovatus,Bacteroides ovatus,0.547,60,2021/12/16,No
+P.copri 上清液+B.ovatus-1,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.062,0,2021/12/16,Yes
+P.copri 上清液+B.ovatus-2,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.063,0,2021/12/16,Yes
+P.copri 上清液+B.ovatus-3,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.071,0,2021/12/16,Yes
+P.copri 上清液+B.ovatus-4,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.072,0,2021/12/16,Yes
+P.copri 上清液+B.ovatus-5,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.062,0,2021/12/16,Yes
+P.copri 上清液+B.ovatus-6,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.059,0,2021/12/16,Yes
+P.copri 上清液+B.ovatus-1,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.096,6,2021/12/16,Yes
+P.copri 上清液+B.ovatus-2,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.097,6,2021/12/16,Yes
+P.copri 上清液+B.ovatus-3,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.13,6,2021/12/16,Yes
+P.copri 上清液+B.ovatus-4,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.13,6,2021/12/16,Yes
+P.copri 上清液+B.ovatus-5,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.108,6,2021/12/16,Yes
+P.copri 上清液+B.ovatus-6,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.107,6,2021/12/16,Yes
+P.copri 上清液+B.ovatus-1,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.124,12,2021/12/16,Yes
+P.copri 上清液+B.ovatus-2,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.12,12,2021/12/16,Yes
+P.copri 上清液+B.ovatus-3,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.175,12,2021/12/16,Yes
+P.copri 上清液+B.ovatus-4,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.166,12,2021/12/16,Yes
+P.copri 上清液+B.ovatus-5,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.139,12,2021/12/16,Yes
+P.copri 上清液+B.ovatus-6,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.136,12,2021/12/16,Yes
+P.copri 上清液+B.ovatus-1,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.242,24,2021/12/16,Yes
+P.copri 上清液+B.ovatus-2,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.263,24,2021/12/16,Yes
+P.copri 上清液+B.ovatus-3,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.31,24,2021/12/16,Yes
+P.copri 上清液+B.ovatus-4,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.304,24,2021/12/16,Yes
+P.copri 上清液+B.ovatus-5,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.209,24,2021/12/16,Yes
+P.copri 上清液+B.ovatus-6,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.216,24,2021/12/16,Yes
+P.copri 上清液+B.ovatus-1,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.311,36,2021/12/16,Yes
+P.copri 上清液+B.ovatus-2,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.26,36,2021/12/16,Yes
+P.copri 上清液+B.ovatus-3,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.359,36,2021/12/16,Yes
+P.copri 上清液+B.ovatus-4,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.341,36,2021/12/16,Yes
+P.copri 上清液+B.ovatus-5,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.394,36,2021/12/16,Yes
+P.copri 上清液+B.ovatus-6,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.399,36,2021/12/16,Yes
+P.copri 上清液+B.ovatus-1,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.289,48,2021/12/16,Yes
+P.copri 上清液+B.ovatus-2,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.323,48,2021/12/16,Yes
+P.copri 上清液+B.ovatus-3,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.325,48,2021/12/16,Yes
+P.copri 上清液+B.ovatus-4,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.34,48,2021/12/16,Yes
+P.copri 上清液+B.ovatus-5,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.349,48,2021/12/16,Yes
+P.copri 上清液+B.ovatus-6,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.318,48,2021/12/16,Yes
+P.copri 上清液+B.ovatus-1,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.251,60,2021/12/16,Yes
+P.copri 上清液+B.ovatus-2,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.258,60,2021/12/16,Yes
+P.copri 上清液+B.ovatus-3,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.282,60,2021/12/16,Yes
+P.copri 上清液+B.ovatus-4,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.301,60,2021/12/16,Yes
+P.copri 上清液+B.ovatus-5,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.252,60,2021/12/16,Yes
+P.copri 上清液+B.ovatus-6,B.ovatus+P.copri sup,B.ovatus,Bacteroides ovatus,0.266,60,2021/12/16,Yes
+P.copri-1,P.copri,P.copri,Prevotella copri,0.075,0,2021/12/16,No
+P.copri-2,P.copri,P.copri,Prevotella copri,0.074,0,2021/12/16,No
+P.copri-3,P.copri,P.copri,Prevotella copri,0.077,0,2021/12/16,No
+P.copri-4,P.copri,P.copri,Prevotella copri,0.066,0,2021/12/16,No
+P.copri-5,P.copri,P.copri,Prevotella copri,0.071,0,2021/12/16,No
+P.copri-6,P.copri,P.copri,Prevotella copri,0.071,0,2021/12/16,No
+P.copri-1,P.copri,P.copri,Prevotella copri,0.182,6,2021/12/16,No
+P.copri-2,P.copri,P.copri,Prevotella copri,0.18,6,2021/12/16,No
+P.copri-3,P.copri,P.copri,Prevotella copri,0.136,6,2021/12/16,No
+P.copri-4,P.copri,P.copri,Prevotella copri,0.135,6,2021/12/16,No
+P.copri-5,P.copri,P.copri,Prevotella copri,0.192,6,2021/12/16,No
+P.copri-6,P.copri,P.copri,Prevotella copri,0.197,6,2021/12/16,No
+P.copri-1,P.copri,P.copri,Prevotella copri,0.226,12,2021/12/16,No
+P.copri-2,P.copri,P.copri,Prevotella copri,0.207,12,2021/12/16,No
+P.copri-3,P.copri,P.copri,Prevotella copri,0.146,12,2021/12/16,No
+P.copri-4,P.copri,P.copri,Prevotella copri,0.156,12,2021/12/16,No
+P.copri-5,P.copri,P.copri,Prevotella copri,0.184,12,2021/12/16,No
+P.copri-6,P.copri,P.copri,Prevotella copri,0.196,12,2021/12/16,No
+P.copri-1,P.copri,P.copri,Prevotella copri,0.252,24,2021/12/16,No
+P.copri-2,P.copri,P.copri,Prevotella copri,0.262,24,2021/12/16,No
+P.copri-3,P.copri,P.copri,Prevotella copri,0.178,24,2021/12/16,No
+P.copri-4,P.copri,P.copri,Prevotella copri,0.175,24,2021/12/16,No
+P.copri-5,P.copri,P.copri,Prevotella copri,0.22,24,2021/12/16,No
+P.copri-6,P.copri,P.copri,Prevotella copri,0.21,24,2021/12/16,No
+P.copri-1,P.copri,P.copri,Prevotella copri,0.267,36,2021/12/16,No
+P.copri-2,P.copri,P.copri,Prevotella copri,0.236,36,2021/12/16,No
+P.copri-3,P.copri,P.copri,Prevotella copri,0.205,36,2021/12/16,No
+P.copri-4,P.copri,P.copri,Prevotella copri,0.199,36,2021/12/16,No
+P.copri-5,P.copri,P.copri,Prevotella copri,0.223,36,2021/12/16,No
+P.copri-6,P.copri,P.copri,Prevotella copri,0.211,36,2021/12/16,No
+P.copri-1,P.copri,P.copri,Prevotella copri,0.268,48,2021/12/16,No
+P.copri-2,P.copri,P.copri,Prevotella copri,0.28,48,2021/12/16,No
+P.copri-3,P.copri,P.copri,Prevotella copri,0.207,48,2021/12/16,No
+P.copri-4,P.copri,P.copri,Prevotella copri,0.215,48,2021/12/16,No
+P.copri-5,P.copri,P.copri,Prevotella copri,0.23,48,2021/12/16,No
+P.copri-6,P.copri,P.copri,Prevotella copri,0.25,48,2021/12/16,No
+P.copri-1,P.copri,P.copri,Prevotella copri,0.243,60,2021/12/16,No
+P.copri-2,P.copri,P.copri,Prevotella copri,0.245,60,2021/12/16,No
+P.copri-3,P.copri,P.copri,Prevotella copri,0.192,60,2021/12/16,No
+P.copri-4,P.copri,P.copri,Prevotella copri,0.194,60,2021/12/16,No
+P.copri-5,P.copri,P.copri,Prevotella copri,0.233,60,2021/12/16,No
+P.copri-6,P.copri,P.copri,Prevotella copri,0.246,60,2021/12/16,No
+P.copri 上清液+P.copri-1,P.copri+P.copri sup,P.copri,Prevotella copri,0.068,0,2021/12/16,Yes
+P.copri 上清液+P.copri-2,P.copri+P.copri sup,P.copri,Prevotella copri,0.063,0,2021/12/16,Yes
+P.copri 上清液+P.copri-3,P.copri+P.copri sup,P.copri,Prevotella copri,0.064,0,2021/12/16,Yes
+P.copri 上清液+P.copri-4,P.copri+P.copri sup,P.copri,Prevotella copri,0.063,0,2021/12/16,Yes
+P.copri 上清液+P.copri-5,P.copri+P.copri sup,P.copri,Prevotella copri,0.066,0,2021/12/16,Yes
+P.copri 上清液+P.copri-6,P.copri+P.copri sup,P.copri,Prevotella copri,0.064,0,2021/12/16,Yes
+P.copri 上清液+P.copri-1,P.copri+P.copri sup,P.copri,Prevotella copri,0.212,6,2021/12/16,Yes
+P.copri 上清液+P.copri-2,P.copri+P.copri sup,P.copri,Prevotella copri,0.219,6,2021/12/16,Yes
+P.copri 上清液+P.copri-3,P.copri+P.copri sup,P.copri,Prevotella copri,0.172,6,2021/12/16,Yes
+P.copri 上清液+P.copri-4,P.copri+P.copri sup,P.copri,Prevotella copri,0.18,6,2021/12/16,Yes
+P.copri 上清液+P.copri-5,P.copri+P.copri sup,P.copri,Prevotella copri,0.181,6,2021/12/16,Yes
+P.copri 上清液+P.copri-6,P.copri+P.copri sup,P.copri,Prevotella copri,0.194,6,2021/12/16,Yes
+P.copri 上清液+P.copri-1,P.copri+P.copri sup,P.copri,Prevotella copri,0.339,12,2021/12/16,Yes
+P.copri 上清液+P.copri-2,P.copri+P.copri sup,P.copri,Prevotella copri,0.309,12,2021/12/16,Yes
+P.copri 上清液+P.copri-3,P.copri+P.copri sup,P.copri,Prevotella copri,0.262,12,2021/12/16,Yes
+P.copri 上清液+P.copri-4,P.copri+P.copri sup,P.copri,Prevotella copri,0.247,12,2021/12/16,Yes
+P.copri 上清液+P.copri-5,P.copri+P.copri sup,P.copri,Prevotella copri,0.272,12,2021/12/16,Yes
+P.copri 上清液+P.copri-6,P.copri+P.copri sup,P.copri,Prevotella copri,0.253,12,2021/12/16,Yes
+P.copri 上清液+P.copri-1,P.copri+P.copri sup,P.copri,Prevotella copri,0.276,24,2021/12/16,Yes
+P.copri 上清液+P.copri-2,P.copri+P.copri sup,P.copri,Prevotella copri,0.293,24,2021/12/16,Yes
+P.copri 上清液+P.copri-3,P.copri+P.copri sup,P.copri,Prevotella copri,0.275,24,2021/12/16,Yes
+P.copri 上清液+P.copri-4,P.copri+P.copri sup,P.copri,Prevotella copri,0.291,24,2021/12/16,Yes
+P.copri 上清液+P.copri-5,P.copri+P.copri sup,P.copri,Prevotella copri,0.399,24,2021/12/16,Yes
+P.copri 上清液+P.copri-6,P.copri+P.copri sup,P.copri,Prevotella copri,0.422,24,2021/12/16,Yes
+P.copri 上清液+P.copri-1,P.copri+P.copri sup,P.copri,Prevotella copri,0.414,36,2021/12/16,Yes
+P.copri 上清液+P.copri-2,P.copri+P.copri sup,P.copri,Prevotella copri,0.39,36,2021/12/16,Yes
+P.copri 上清液+P.copri-3,P.copri+P.copri sup,P.copri,Prevotella copri,0.317,36,2021/12/16,Yes
+P.copri 上清液+P.copri-4,P.copri+P.copri sup,P.copri,Prevotella copri,0.266,36,2021/12/16,Yes
+P.copri 上清液+P.copri-5,P.copri+P.copri sup,P.copri,Prevotella copri,0.321,36,2021/12/16,Yes
+P.copri 上清液+P.copri-6,P.copri+P.copri sup,P.copri,Prevotella copri,0.303,36,2021/12/16,Yes
+P.copri 上清液+P.copri-1,P.copri+P.copri sup,P.copri,Prevotella copri,0.462,48,2021/12/16,Yes
+P.copri 上清液+P.copri-2,P.copri+P.copri sup,P.copri,Prevotella copri,0.447,48,2021/12/16,Yes
+P.copri 上清液+P.copri-3,P.copri+P.copri sup,P.copri,Prevotella copri,0.314,48,2021/12/16,Yes
+P.copri 上清液+P.copri-4,P.copri+P.copri sup,P.copri,Prevotella copri,0.331,48,2021/12/16,Yes
+P.copri 上清液+P.copri-5,P.copri+P.copri sup,P.copri,Prevotella copri,0.32,48,2021/12/16,Yes
+P.copri 上清液+P.copri-6,P.copri+P.copri sup,P.copri,Prevotella copri,0.337,48,2021/12/16,Yes
+P.copri 上清液+P.copri-1,P.copri+P.copri sup,P.copri,Prevotella copri,0.407,60,2021/12/16,Yes
+P.copri 上清液+P.copri-2,P.copri+P.copri sup,P.copri,Prevotella copri,0.422,60,2021/12/16,Yes
+P.copri 上清液+P.copri-3,P.copri+P.copri sup,P.copri,Prevotella copri,0.277,60,2021/12/16,Yes
+P.copri 上清液+P.copri-4,P.copri+P.copri sup,P.copri,Prevotella copri,0.284,60,2021/12/16,Yes
+P.copri 上清液+P.copri-5,P.copri+P.copri sup,P.copri,Prevotella copri,0.291,60,2021/12/16,Yes
+P.copri 上清液+P.copri-6,P.copri+P.copri sup,P.copri,Prevotella copri,0.292,60,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-1,Negative+P.copri sup,Negative,Negative,0.068,0,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-2,Negative+P.copri sup,Negative,Negative,0.063,0,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-3,Negative+P.copri sup,Negative,Negative,0.059,0,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-4,Negative+P.copri sup,Negative,Negative,0.056,0,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-5,Negative+P.copri sup,Negative,Negative,0.057,0,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-6,Negative+P.copri sup,Negative,Negative,0.059,0,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-1,Negative+B.ovatus,Negative,Negative,0.059,0,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-2,Negative+B.ovatus,Negative,Negative,0.065,0,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-3,Negative+B.ovatus,Negative,Negative,0.06,0,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-4,Negative+B.ovatus,Negative,Negative,0.055,0,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-5,Negative+B.ovatus,Negative,Negative,0.05,0,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-6,Negative+B.ovatus,Negative,Negative,0.057,0,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-1,Negative+P.copri sup,Negative,Negative,0.062,6,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-2,Negative+P.copri sup,Negative,Negative,0.057,6,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-3,Negative+P.copri sup,Negative,Negative,0.06,6,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-4,Negative+P.copri sup,Negative,Negative,0.054,6,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-5,Negative+P.copri sup,Negative,Negative,0.055,6,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-6,Negative+P.copri sup,Negative,Negative,0.062,6,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-1,Negative+B.ovatus,Negative,Negative,0.06,6,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-2,Negative+B.ovatus,Negative,Negative,0.055,6,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-3,Negative+B.ovatus,Negative,Negative,0.057,6,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-4,Negative+B.ovatus,Negative,Negative,0.055,6,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-5,Negative+B.ovatus,Negative,Negative,0.055,6,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-6,Negative+B.ovatus,Negative,Negative,0.062,6,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-1,Negative+P.copri sup,Negative,Negative,0.058,12,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-2,Negative+P.copri sup,Negative,Negative,0.058,12,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-3,Negative+P.copri sup,Negative,Negative,0.057,12,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-4,Negative+P.copri sup,Negative,Negative,0.053,12,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-5,Negative+P.copri sup,Negative,Negative,0.058,12,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-6,Negative+P.copri sup,Negative,Negative,0.063,12,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-1,Negative+B.ovatus,Negative,Negative,0.066,12,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-2,Negative+B.ovatus,Negative,Negative,0.053,12,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-3,Negative+B.ovatus,Negative,Negative,0.057,12,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-4,Negative+B.ovatus,Negative,Negative,0.058,12,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-5,Negative+B.ovatus,Negative,Negative,0.056,12,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-6,Negative+B.ovatus,Negative,Negative,0.055,12,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-1,Negative+P.copri sup,Negative,Negative,0.057,24,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-2,Negative+P.copri sup,Negative,Negative,0.056,24,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-3,Negative+P.copri sup,Negative,Negative,0.053,24,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-4,Negative+P.copri sup,Negative,Negative,0.053,24,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-5,Negative+P.copri sup,Negative,Negative,0.05,24,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-6,Negative+P.copri sup,Negative,Negative,0.052,24,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-1,Negative+B.ovatus,Negative,Negative,0.057,24,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-2,Negative+B.ovatus,Negative,Negative,0.056,24,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-3,Negative+B.ovatus,Negative,Negative,0.053,24,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-4,Negative+B.ovatus,Negative,Negative,0.052,24,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-5,Negative+B.ovatus,Negative,Negative,0.054,24,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-6,Negative+B.ovatus,Negative,Negative,0.051,24,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-1,Negative+P.copri sup,Negative,Negative,0.07,36,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-2,Negative+P.copri sup,Negative,Negative,0.066,36,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-3,Negative+P.copri sup,Negative,Negative,0.062,36,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-4,Negative+P.copri sup,Negative,Negative,0.07,36,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-5,Negative+P.copri sup,Negative,Negative,0.07,36,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-6,Negative+P.copri sup,Negative,Negative,0.07,36,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-1,Negative+B.ovatus,Negative,Negative,0.068,36,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-2,Negative+B.ovatus,Negative,Negative,0.063,36,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-3,Negative+B.ovatus,Negative,Negative,0.059,36,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-4,Negative+B.ovatus,Negative,Negative,0.066,36,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-5,Negative+B.ovatus,Negative,Negative,0.07,36,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-6,Negative+B.ovatus,Negative,Negative,0.071,36,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-1,Negative+P.copri sup,Negative,Negative,0.071,48,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-2,Negative+P.copri sup,Negative,Negative,0.069,48,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-3,Negative+P.copri sup,Negative,Negative,0.08,48,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-4,Negative+P.copri sup,Negative,Negative,0.068,48,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-5,Negative+P.copri sup,Negative,Negative,0.075,48,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-6,Negative+P.copri sup,Negative,Negative,0.07,48,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-1,Negative+B.ovatus,Negative,Negative,0.066,48,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-2,Negative+B.ovatus,Negative,Negative,0.067,48,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-3,Negative+B.ovatus,Negative,Negative,0.082,48,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-4,Negative+B.ovatus,Negative,Negative,0.069,48,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-5,Negative+B.ovatus,Negative,Negative,0.075,48,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-6,Negative+B.ovatus,Negative,Negative,0.076,48,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-1,Negative+P.copri sup,Negative,Negative,0.061,60,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-2,Negative+P.copri sup,Negative,Negative,0.057,60,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-3,Negative+P.copri sup,Negative,Negative,0.055,60,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-4,Negative+P.copri sup,Negative,Negative,0.059,60,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-5,Negative+P.copri sup,Negative,Negative,0.06,60,2021/12/16,Yes
+空白RCM培养基+P.copri上清液-6,Negative+P.copri sup,Negative,Negative,0.065,60,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-1,Negative+B.ovatus,Negative,Negative,0.061,60,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-2,Negative+B.ovatus,Negative,Negative,0.058,60,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-3,Negative+B.ovatus,Negative,Negative,0.053,60,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-4,Negative+B.ovatus,Negative,Negative,0.06,60,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-5,Negative+B.ovatus,Negative,Negative,0.06,60,2021/12/16,Yes
+空白RCM培养基+B.ovatus上清液-6,Negative+B.ovatus,Negative,Negative,0.067,60,2021/12/16,Yes
