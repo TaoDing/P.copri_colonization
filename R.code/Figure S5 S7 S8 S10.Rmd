@@ -1,0 +1,293 @@
+
+
+## library
+
+```{r,echo=T,warning=FALSE}
+
+library(tidytree)
+library(ggplot2)
+library(ggtree) 
+library(ggtreeExtra)
+library(ggstar)
+library(reshape2)
+library(ggpubr)
+library(statnet)
+library(circlize)
+
+
+mypal1 <- ggsci::pal_lancet( alpha = 0.8)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.8)(9)
+mypal3 <- ggsci::pal_aaas(alpha = 0.8)(9)
+
+
+
+```
+
+
+
+
+## Figure S5
+
+```{r,echo=T,warning=FALSE}
+
+metadata_meta <- read.csv('iuput files/metadata_meta_107.csv',header=T,row.names = 1)
+species <- read.table('iuput files/kraken2_combined_unstratified_species.txt',header = T,sep='\t',quote = '')
+tax <- read.table('iuput files/kraken2_taxonomy.txt',header = T,sep='\t',quote = '')
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species.tax <- species.tax[!duplicated(species.tax$species), ] # 去重复
+species <- merge(species.tax,species,by='species')
+
+Bacteria <- subset(species,kingdom=='k__Bacteria')
+rownames(Bacteria) <- Bacteria$species
+
+Bacteria<- Bacteria[,c(8:114)]
+Bacteria <- as.data.frame(t(Bacteria))
+Bacteria <- Bacteria[,colMeans(Bacteria)>500] 
+Bacteria.ra <- Bacteria/apply(Bacteria, 1, sum)*100
+Bacteria.ra$seq_ID <- rownames(Bacteria.ra)
+Bacteria.ra <- merge(metadata_meta,Bacteria.ra,by='seq_ID')
+rownames(Bacteria.ra) <- Bacteria.ra$seq_ID
+
+
+
+
+
+ggplot(data=Bacteria.ra, aes(x=Bacteria.ra$Bacteroides_ovatus,y=Prevotella_copri,group=national,col=national,fill=national))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=data, method = "spearman")+
+labs(x = "B_ovatus(%)", y = "Prevotella_copri (%)")+
+  theme_classic()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14), axis.title.y=element_text(size=14,face='italic'))+ 
+  theme(axis.text.x = element_text(size=14),axis.text.y = element_text(size=14)) + 
+  theme(legend.text = element_text(size=14)) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('#b200f8','#04f60b','#ffbaba','red'))+
+  scale_fill_manual(values = c('#b200f8','#04f60b','#ffbaba','red'))
+
+
+ggplot(data=Bacteria.ra, aes(x=Bacteria.ra$Bacteroides_ovatus,y=Prevotella_copri))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=data, method = "spearman")+
+labs(x = "B_ovatus(%)", y = "Prevotella_copri (%)")+
+  theme_classic()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14), axis.title.y=element_text(size=14,face='italic'))+ 
+  theme(axis.text.x = element_text(size=14),axis.text.y = element_text(size=14)) + 
+  theme(legend.text = element_text(size=14)) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('#b200f8','#04f60b','#ffbaba','red'))+
+  scale_fill_manual(values = c('#b200f8','#04f60b','#ffbaba','red'))
+
+
+```
+
+# Figure S7-S8
+
+```{r}
+
+species.ra <- read.csv('P. copri相关的通路input/species.ra1_4.csv')
+
+pathway <- read.csv('P. copri相关的通路input/pathway.ra.1_4.csv',row.names = 1)
+
+met <- read.csv('met_2021.csv')
+
+
+
+species.ra <- merge(met,species.ra,by='X')
+stool.ra <- subset(species.ra,species.ra$body_site=='stool')
+
+
+colnames(stool.ra) <- gsub(' ','_',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub('[','',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub(']','',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub('.','',colnames(stool.ra),fixed = T)
+
+
+row.names(stool.ra) <- stool.ra$X
+
+
+
+
+mean(stool.ra$s__Prevotella_copri)
+
+table(stool.ra$study_name)
+
+table(stool.ra$study_name,stool.ra$country)
+
+ggplot(data=stool.ra,aes(x=log2(s__Prevotella_copri)))+
+  geom_histogram(color='black',fill="#E64B35E5",alpha=0.5,
+                 aes(y=..density..))+
+  geom_density(alpha = 1,color='black',size=1)+
+   theme_classic() + 
+  ggtitle('Distribution of P. copri (n=1584)')+
+  
+  labs( y = 'Density',x='log2 (Abundance %)') +
+  theme(
+        axis.text.x=element_text(colour = 'black',size=14),
+        axis.title.x=element_text(colour = 'black',size=14),
+        axis.text.y=element_text(colour = 'black',size=14),
+        axis.title.y =element_text(colour = 'black',size=14),
+        strip.background = element_blank(),
+        strip.text = element_text(colour = 'black',size=14)) + 
+  theme(legend.position = "right",
+        legend.text =element_text(colour = 'black',size=14),
+        legend.title =element_blank() ) + 
+  theme(panel.grid=element_blank()) +    
+  theme(panel.border=element_blank())   
+
+
+
+
+ggplot(data=stool.ra,aes(x=log2(s__Bacteroides_ovatus)))+
+  geom_histogram(color='black',fill="#E64B35E5",alpha=0.5,
+                 aes(y=..density..))+
+  geom_density(alpha = 1,color='black',size=1)+
+   theme_classic() + 
+  ggtitle('Distribution of B. ovatus (n=1584)')+
+  
+  labs( y = 'Density',x='log2 (Abundance %)') +
+  theme(
+        axis.text.x=element_text(colour = 'black',size=14),
+        axis.title.x=element_text(colour = 'black',size=14),
+        axis.text.y=element_text(colour = 'black',size=14),
+        axis.title.y =element_text(colour = 'black',size=14),
+        strip.background = element_blank(),
+        strip.text = element_text(colour = 'black',size=14)) + 
+  theme(legend.position = "right",
+        legend.text =element_text(colour = 'black',size=14),
+        legend.title =element_blank() ) + 
+  theme(panel.grid=element_blank()) +    
+  theme(panel.border=element_blank())   
+
+
+```
+
+
+# Figure S10
+
+```{r,echo=F}
+
+library(ggplot2)
+library(ggpubr)
+library(reshape2)
+library(patchwork)
+
+BC <- read.csv('71个样本的血生化指标.csv',header=T,row.names=3)
+
+BC <- BC[,c(15:32)]
+BC <- BC[rownames(BC.ra),]
+
+
+species <- read.table('kraken2_combined_unstratified_species.txt',header = T,sep='\t',quote = '')
+tax <- read.table('kraken2_taxonomy.txt',header = T,sep='\t',quote = '')
+
+
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species.tax <- species.tax[!duplicated(species.tax$species), ] # 去重复
+species <- merge(species.tax,species,by='species')
+
+Bacteria <- subset(species,kingdom=='k__Bacteria')
+rownames(Bacteria) <- Bacteria$species
+
+Bacteria<- Bacteria[,c(8:114)]
+Bacteria <- as.data.frame(t(Bacteria))
+Bacteria <- Bacteria[,colMeans(Bacteria)>500] 
+Bacteria.ra <- Bacteria/apply(Bacteria, 1, sum)*100
+
+
+Bacteria.ra <-Bacteria.ra[rownames(BC),]
+BC.ra <- data.frame(BC,'Prevotella.copri'=Bacteria.ra$Prevotella_copri)
+BC.ra <- BC.ra[BC.ra$Prevotella.copri>5,]
+BC.ra.long <- melt(BC.ra,id.vars = 'Prevotella.copri')
+
+
+
+
+ggplot(data=BC.ra.long, aes(x=value,y=Prevotella.copri))+
+  facet_wrap(~variable,scales = 'free_x')+
+  geom_point(size=2)+stat_smooth(method="lm",se=T,colour='red')+
+  stat_cor(data=BC.ra.long, method = "spearman")+
+labs(y = "P.copri(%)")+
+  theme_classic()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14), axis.title.y=element_text(size=14,face='italic'))+ 
+  theme(axis.text.x = element_text(size=14),axis.text.y = element_text(size=14)) + 
+  theme(legend.text = element_text(size=14)) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))+
+  scale_fill_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))
+
+a <- ggplot(data=BC.ra, aes(x=BC.ra$TP,y=Prevotella.copri))+
+  geom_point(size=2)+stat_smooth(method="lm",se=T,colour='red')+
+  stat_cor(data=BC.ra, method = "spearman")+
+labs(y = "P.copri(%)",x='TP (g/L)')+
+  theme_classic()+ 
+  ylim(0,80)+
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))+
+  scale_fill_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))
+
+b <- ggplot(data=BC.ra, aes(x=BC.ra$ALB,y=Prevotella.copri))+
+  geom_point(size=2)+stat_smooth(method="lm",se=T,colour='red')+
+  stat_cor(data=BC.ra, method = "spearman")+
+labs(y = "P.copri(%)",x='ALB (g/L)')+
+  theme_classic()+ 
+   ylim(0,80)+
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))+
+  scale_fill_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))
+
+
+
+c <- ggplot(data=BC.ra, aes(x=BC.ra$TBIL,y=Prevotella.copri))+
+  geom_point(size=2)+stat_smooth(method="lm",se=T,colour='red')+
+  stat_cor(data=BC.ra, method = "spearman")+
+labs(y = "P.copri(%)",x='TBIL (μmol/L)')+
+  theme_classic()+ 
+   ylim(0,80)+
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))+
+  scale_fill_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))
+
+d <- ggplot(data=BC.ra, aes(x=BC.ra$DBIL,y=Prevotella.copri))+
+  geom_point(size=2)+stat_smooth(method="lm",se=T,colour='red')+
+  stat_cor(data=BC.ra, method = "spearman")+
+labs(y = "P.copri(%)",x='DBIL (μmol/L)')+
+  theme_classic()+ 
+   ylim(0,80)+
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))+
+  scale_fill_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))
+
+
+
+a+b+c+d
+(a-b)-(c-d)
+
+```
