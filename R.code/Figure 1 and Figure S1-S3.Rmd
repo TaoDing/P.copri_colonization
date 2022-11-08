@@ -39,8 +39,8 @@ lefse_1M_han.1 <- read.csv('lefse/lefse_1M_han_lefse.ra.csv',header = T)
 ggplot(data=lefse_1M_han.1,aes(x=lefse_1M_han.1$LDA,y=-log10(lefse_1M_han.1$p),group=lefse_1M_han.1$group,col=group))+    
    geom_point(aes(size=lefse_1M_han.1$Size))+
    xlab("LDA scores")+ylab("-log10(FDR)")+
-#  geom_hline(aes(yintercept=-log10(0.01)),colour="grey",size=1.2 ,linetype=1) + #增加水平间隔线
-  geom_vline(aes(xintercept=0), colour="grey",size=1.2 ,linetype=1)+ #增加垂直间隔线
+#  geom_hline(aes(yintercept=-log10(0.01)),colour="grey",size=1.2 ,linetype=1) + 
+  geom_vline(aes(xintercept=0), colour="grey",size=1.2 ,linetype=1)+ 
   geom_label_repel(label=lefse_1M_han.1$Label,size=4,fontface='italic',
                    direction='x',nudge_x = 2)+
   theme_cleveland()+ 
