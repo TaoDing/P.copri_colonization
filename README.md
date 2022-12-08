@@ -1,7 +1,7 @@
 # P.copri_colonization
 
 
-## Prevotella copri secures privileged intestinal colonization by the assistance of deoxyadenosine kinase-mediated DNA salvage synthesis 
+## Prevotella copri utilizes species-unique deoxyadenosine kinase-mediated DNA salvage synthesis to secure privileged intestinal colonization 
 
 ### Context:
 
