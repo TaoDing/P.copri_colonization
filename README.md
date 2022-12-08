@@ -16,22 +16,20 @@ Supplementary tables: Supplementary tables in the article.
 
 ### Processiong Data:
 
-Figure 1. LEfSe analysis showed that Prevotella and Bacteroides enriched in the healthy populations of TAR and GD, respectively.
 
-Figure 2. P. copri dominated the symbiotic community and maintained a continuous colonization advantage in a 2-year cohort.
+Figure 1. P. copri dominated the gut microbiota and maintained a continuous colonization.
 
-Figure 3. Establishment of P. copri's colonization advantage in the human population was accompanied by a reduction in B. ovatus.
+Figure 2. Colonization of P. copri in population was accompanied by a reduction in B. ovatus. 
 
-Figure 4. The competition between P. copri and Bacteroides spp. was due to a common requirement for multiple substrates.
+Figure 3. The competition between P. copri and Bacteroides spp. was due to a common requirement for multiple substrates.
 
-Figure 5. P. copri gained colonization advantages through metabolic regulation to inhibit the expansion of commensal bacteria (especially to Bacteroides spp.).
+Figure 4. Supernatant feeding experiments showed that P. copri could utilize the metabolites of Bacteroides and regulate the growth of commensal bacteria.
 
-Figure 6. P. copri's competitive advantage was linked to associated with nucleotide energy substances synthesis.
+Figure 5.P. copri was superior to B. ovatus in nucleotide metabolism to synthesize ATP.
 
-Figure 7. P. copri harbored a stronger ability to synthesize ATP than B. ovatus and
-was capable of metabolizing 2'-deoxyadenosine under the impetus of ATP, promoting its growth in case of nutrient limitation.
+Figure 6. P. copri metabolized 2'-deoxyadenosine via dak enzyme to support growth in auxotrophic condition.
 
-Figure 8. P. copri clade A gradually became the dominant clade during host migration.
+Figure 7. High prevalence of dak on P. copri Clade A promoted its emergence as the dominant subspecies.
 
 Figures S1-S10. Supplementary figures in the article; for specific information, please visit our original article.
 
