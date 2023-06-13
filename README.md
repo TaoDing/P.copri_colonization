@@ -1,7 +1,7 @@
 # P.copri_colonization
 
 
-## Prevotella copri utilizes species-unique deoxyadenosine kinase-mediated DNA salvage synthesis to secure privileged intestinal colonization 
+## Prevotella copri Exploits Metabolic Synergies with Bacteroides for Intestinal Colonization
 
 ### Context:
 
@@ -21,9 +21,9 @@ Figure 1. P. copri dominated the gut microbiota and maintained a continuous colo
 
 Figure 2. Colonization of P. copri in population was accompanied by a reduction in B. ovatus. 
 
-Figure 3. The competition between P. copri and Bacteroides spp. was due to a common requirement for multiple substrates.
+Figure 3. Supernatant feeding experiments showed that P. copri could utilize the metabolites of Bacteroides and regulate the growth of commensal bacteria.
 
-Figure 4. Supernatant feeding experiments showed that P. copri could utilize the metabolites of Bacteroides and regulate the growth of commensal bacteria.
+Figure 4. Mice co-colonization experiments showed that the colonization of P. copri was promoted by B. ovatus metabolites to obtain more carbohydrates.
 
 Figure 5.P. copri was superior to B. ovatus in nucleotide metabolism to synthesize ATP.
 
