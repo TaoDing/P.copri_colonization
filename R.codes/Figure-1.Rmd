@@ -1,0 +1,293 @@
+---
+title: "Figure 1"
+output:
+  html_document: default
+---
+          
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r,echo = F,include=F, results="hide"}
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(vegan)
+library(tidyverse)
+library(ggsci)
+library(patchwork)
+
+mypal1 <- ggsci::pal_npg( alpha = 0.9)(9) 
+mypal2 <- ggsci::pal_lancet( alpha = 0.5)(9)
+mycol <-ggsci::pal_npg( alpha = 0.8)(9) 
+
+
+```
+
+### Figure 1A,1B 
+                     
+```{r,echo = TRUE}
+
+
+
+weighted_unifrac.dis <- read.table('input/distance-matrix-weighted-unifrac.tsv',header=T,row.names = 1,sep='\t')
+metadata <- read.csv('input/tiv16s.all.BMI.metadata.csv',header=T,row.names=1)
+metadata <- metadata[rownames(weighted_unifrac.dis),]
+fecal.metadata <- subset(metadata,type%in%'fecal'&national%in%c('tibetan'))
+fecal.metadata $relocation.years <- factor(fecal.metadata $relocation.years,levels = c('1M','1Y','2Y'))
+
+
+fecal.weighted_unifrac <-  weighted_unifrac.dis[rownames(fecal.metadata), rownames(fecal.metadata)] # subset and reorder distance matrix
+
+
+
+
+
+fecal.adon.result<-adonis(fecal.weighted_unifrac ~ fecal.metadata$relocation.years)$aov.tab
+
+
+fecal.pcoa <-  cmdscale(fecal.weighted_unifrac, k=2, eig=T) # k is dimension,  eig is eigenvalues
+fecal.points <-  as.data.frame(fecal.pcoa$points) # get coordinate string, format to dataframme
+colnames(fecal.points) = c("x", "y") 
+fecal.eig <- fecal.pcoa$eig
+
+fecal.points <-  cbind(fecal.points, fecal.metadata[match(rownames(fecal.points), rownames(fecal.metadata)), ])
+
+
+
+
+
+
+
+
+
+
+fecal.points$relocation.years <- as.character(fecal.points$relocation.years)
+ggscatterhist(fecal.points,x="x",y="y",
+              color="relocation.years",
+              fill="relocation.years",
+              palette=ggsci::pal_npg( alpha = 1)(3) ,
+              shape=21,
+              size=2,
+              linetype = "solid",
+              bins=30,
+              margin.plot="boxplot",
+              margin.params=list(fill="relocation.years",group="relocation.years",color='black'),
+              margin.ggtheme=theme_light(),
+              margin.space=F,
+              main.plot.size=2,
+              margin.plot.size=1,
+              title="weighted_unifrac distance",
+              legend="right",
+  xlab =paste("PCoA 1 (", format(100 * fecal.eig[1] / sum(fecal.eig), digits=4), "%)", sep=""),
+  ylab=paste("PCoA 2 (", format(100 * fecal.eig[2] / sum(fecal.eig), digits=4), "%)", sep=""),
+    ggtheme=theme_cleveland()+  
+    theme(plot.title = element_text(hjust = 0.5,size=15))+
+    theme(axis.title.x =element_text(size=14,color = 'black'),
+          axis.title.y=element_text(size=14,color = 'black'),
+          axis.text.x = element_text(size=14,color = 'black'),
+          axis.text.y = element_text(size=14,color = 'black'),
+          legend.title = element_blank(),
+          legend.text = element_text(size=14,color = 'black')))+
+  annotate("text",x=0.3,y=0.2,size=5,label=paste('P < ',fecal.adon.result$`Pr(>F)`[1]),family="serif",fontface="italic",colour="black")
+
+
+
+
+
+
+
+
+genus.ra <- read.csv('input/genus.ra.csv',header = T,row.names = 1)
+genus.ra <-genus.ra[rownames(fecal.points),] 
+genus.ra <- genus.ra[,colMeans(genus.ra)>1]
+
+
+p.value=matrix(nrow=ncol(genus.ra),ncol=1)
+for(i in 1:ncol(genus.ra))
+{p.value[i,]<- cor.test(genus.ra[,i],fecal.points$`x`,method = 'spearman')$p.value
+}
+
+r=matrix(nrow=ncol(genus.ra),ncol=1)
+for(i in 1:ncol(genus.ra))
+{r[i,]<-cor.test(genus.ra[,i],fecal.points$`x`,method = 'spearman')$estimate
+}
+
+data <- cbind(p.value,r)
+rownames(data) <- colnames(genus.ra)
+
+
+r[p.value>0.05|abs(r)<0.3] = NA 
+r <- as.data.frame(r)
+rownames(r) <- colnames(genus.ra)
+r$pcoa1 <- c('PCoA 1')
+r$genus <- rownames(r)
+
+
+
+
+r <- na.omit(r)
+
+
+
+r$pcoa1 <- as.factor(r$pcoa1)
+r$genus <- as.factor(r$genus)
+r$r <- r$V1
+r <- r[,-1]
+
+col <- car::recode(r$r," 0:1 ='red';else='blue'") # 用颜色表示正负相关
+
+
+
+
+
+
+r <- r[order(abs(r$r)),]
+
+ggplot(data =r , mapping = aes(x = reorder(genus,abs(r)),  y = r))+
+      geom_segment(aes(x = reorder(genus,abs(r) ), y =0, xend =reorder(genus,abs(r) ), yend = r),size=2,color = '#E64B35CC',)+
+   geom_point(fill = '#E64B35CC', color = 'black',size=4,shape=21) +
+     xlab(NULL)+
+     ylab('Significant correlation with PCoA 1 ')+
+     ylim(-1,1)+
+     ggtitle('')+
+     coord_flip()+
+  geom_hline(yintercept = 0)+
+  theme_cleveland()+ 
+  theme(legend.title = element_blank(),legend.position="top",
+        legend.text =element_text(size=14,colour="black"), )+ 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour="black"), axis.title.y=element_text(size=14,colour="black"))+ 
+  theme(axis.text.x = element_text(size=14,colour="black"),axis.text.y = element_text(size=14,colour="black",face = 'italic'))
+
+
+```
+
+
+### Figure 1C
+                     
+```{r,echo = TRUE}
+genus.ra <- read.csv('input/genus.ra.csv',header = T,row.names = 1)
+genus.ra$ID <- rownames(genus.ra)
+metadata <- read.csv('input/tiv16s.all.BMI.metadata.csv',header=T)
+metadata <- subset(metadata,type%in%'fecal'&national%in%c('tibetan'))
+metadata$relocation.years <- factor(metadata$relocation.years,levels = c('1M','1Y','2Y'))
+genus.ra <- merge(metadata,genus.ra,by='ID')
+
+feces.mean <- as.data.frame(colMeans(genus.ra[,-c(1:13)]))
+
+my_comparisons <- list(c("1M", "1Y"),c("1Y", "2Y"),c("1M", "2Y"))
+
+
+
+
+
+
+
+
+three.ra <- genus.ra[,c('relocation.years','Prevotella','Bacteroides','Alloprevotella','Christensenellaceae','Ruminococcaceae')]
+three.ra <- melt(three.ra)
+
+ggplot(three.ra ,aes(x=relocation.years,y=value,fill=relocation.years))+
+    geom_violin(trim=F,aes(fill=factor(relocation.years),alpha=0.5)) +
+    geom_boxplot(width=0.2,position=position_dodge(0.8))+
+    scale_fill_manual(values = mycol)+ 
+    scale_color_manual(values="black")+ 
+    theme_cleveland()+  
+    theme(legend.position="none", 
+          axis.text.x=element_text(colour="black",size=14),
+          strip.text = element_text(size=14,colour="black",face = 'italic'),
+          axis.text.y=element_text(size=14,colour="black"),
+          axis.title.y=element_text(size = 14,vjust = 2),
+          axis.title.x=element_text(size = 14), 
+          plot.title = element_text(size=14,face="bold",hjust = 0.5),
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank())+
+  ggtitle(NULL)+
+    ylab("Abundance(%)")+xlab("")+ 
+    stat_compare_means(method = "kruskal", label.y = 110)+
+   stat_compare_means(label = "p.signif",comparisons=my_comparisons)+
+  ggsci::scale_color_npg(alpha = 0.8)+
+  ggsci::scale_fill_npg(alpha = 0.8)+
+  facet_grid(~variable)
+
+```
+
+
+
+## Figure 1D
+
+```{r,echo=T}
+
+metadata_meta <- read.csv('input/metadata_meta_107.csv',header=T,row.names = 1)
+species <- read.table('input/kraken2_combined_unstratified_species.txt',header = T,sep='\t',quote = '')
+tax <- read.table('input/kraken2_taxonomy.txt',header = T,sep='\t',quote = '')
+P.tax <- subset(tax,tax$genus%in%'Prevotella')
+
+
+
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species <- merge(species.tax,species,by='species')
+Bacteria <- subset(species,kingdom=='k__Bacteria')
+rownames(Bacteria) <- Bacteria$species
+Bacteria<- Bacteria[,c(8:114)]
+
+Bacteria <- as.data.frame(t(Bacteria))
+Bacteria <- Bacteria[,colMeans(Bacteria)>500] 
+Bacteria.ra <- Bacteria/apply(Bacteria, 1, sum)*100
+
+
+P.ra <- Bacteria.ra[,P.tax$species]
+#P.ra <- P.ra[,-1]
+#P.ra <- P.ra[-which(rownames(P.ra)%in%c('SeqCRZa_60','SeqCRZa_69','SeqCRZa_76')),]
+
+
+P.ra$seq_ID <- rownames(P.ra)
+P.ra <- merge(metadata_meta,P.ra,by='seq_ID')
+rownames(P.ra) <- P.ra$seq_ID
+P.ra.long <- melt(P.ra)
+P.ra.long <- subset(P.ra.long,national%in%'tibetan')
+
+P.ra.long$variable <- gsub('Prevotella_','P. ', P.ra.long$variable,fixed = T)
+
+
+
+
+
+
+
+P.ra.long$group2 <- car::recode(P.ra.long$variable,"'P. copri'='P. copri';else='Others'")
+
+P.ra.long$group2 <- factor(P.ra.long$group2,levels = c('P. copri','Others'))
+
+P.ra.long$relocation.years <- car::recode(P.ra.long$relocation.years,
+                                          "'1M'='Baseline'; '1Y'='Y1'; '2Y'='Y2'")
+
+P.ra.long %>%
+  mutate(relocation.years=as.factor(relocation.years)) %>% 
+  group_by(variable) %>%
+  ggplot(aes(x = relocation.years,y =value,
+           group=variable,color=variable)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  facet_wrap(~group2,scales = 'free_y')+
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black',face = 'italic')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = 'Prevotella'))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "Abundance(%)",x=NULL)
+
+```
+ 
