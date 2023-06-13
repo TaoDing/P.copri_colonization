@@ -1,0 +1,225 @@
+
+
+## 配色
+```{r global_options, iNegativelude=FALSE}
+mypal1 <- ggsci::pal_lancet( alpha = 1)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.5)(9)
+
+
+
+```
+
+# Figure 3B 3C 3D
+
+```{r}
+sup1.result <- read.csv('Effect of other bacterial supernatants on Pc.csv',header=T)
+
+sup1.result <- na.omit(sup1.result )
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+
+
+
+
+p <- compare_means(
+  OD600~Group,
+  data=sup1.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Incubation.time'),
+  p.adjust.method = "holm")
+
+
+pc.p <- subset(p,group2=='Pc')
+
+library(tidyverse)
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+sup1.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black',face = 'italic')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+
+
+sup12.result  <- subset(sup1.result ,sup1.result $facet%in%c(1,2))
+
+
+sup12.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black',face = 'italic')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+
+sup13.result  <- subset(sup1.result ,sup1.result $facet%in%c(1,3))
+
+
+sup13.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black',face = 'italic')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+
+
+sup14.result  <- subset(sup1.result ,sup1.result $facet%in%c(1,4))
+
+
+sup14.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black',face = 'italic')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+```
+
+
+# Figure 3E
+
+```{r}
+
+mypal1 <- ggsci::pal_lancet( alpha = 1)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.5)(9)
+
+sup1.result <- read.csv('Effect of the supernatants of Pc on other bacteria.csv',header=T)
+
+
+# sup1.result <- subset(sup1.result,sup1.result$Species%in%c("P.copri","P.oralis","B. pseudocatenulatum",
+#                                                           "B.vulgatus","B.ovatus","L.salivarius","Negative"))
+
+sup1.result <- subset(sup1.result,sup1.result$Species%in%c("P.oralis","B. pseudocatenulatum","B.ovatus",
+                                                        "B.vulgatus","L.salivarius","Negative"))
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+
+
+
+
+p <- compare_means(
+  OD600~Group,
+  data=sup1.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Incubation.time','Species'),
+  p.adjust.method = "holm")
+
+
+
+
+library(tidyverse)
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+sup1.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=PCS)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  facet_wrap(~Species,scales = 'free')+
+  ylim(0,0.8)+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = '+P.copri supernatant'))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+
+```
+
+
+
+
+
+
