@@ -1,0 +1,343 @@
+
+
+# 1 Figure S4 heatmap-P.copri+BO+BV
+
+```{r}
+
+mypal1 <- ggsci::pal_lancet( alpha = 1)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.5)(9)
+mypal3 <- ggsci::pal_jama( alpha = 0.7)(9)
+mypal4<- ggsci::pal_jco( alpha = 0.8)(9)
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+
+
+
+PC.MET.result <- read.csv('Eco-biolog.22.4.18-PC.BO.BV.csv',header=T)
+
+
+
+PC.0H <- subset(PC.MET.result,PC.MET.result$Time.h%in%'0')
+PC.MET.result.1 <- subset(PC.MET.result,PC.MET.result$Time.h>0)
+
+
+PC.MET.result.1$OH <- PC.0H$OD590
+
+
+
+
+PC.MET.result.1$PC.foldchage <- (PC.MET.result.1$OD590-PC.MET.result.1$OH)/PC.MET.result.1$OH
+
+
+
+
+
+
+
+p <- compare_means(
+  OD590~substrates,
+  data=PC.MET.result.1,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Time.h','Species'),
+  p.adjust.method = "holm")
+
+
+PC.p <- subset(p,group1%in%c('Water')&Species%in%c('P.copri'))
+
+BO.p <- subset(p,group1%in%c('Water')&Species%in%c('B. ovatus'))
+
+Bv.p <- subset(p,group1%in%c('Water')&Species%in%c('B. vulgatus'))
+
+PC.MET.result.1$Class <- factor(PC.MET.result.1$Class,levels = unique(PC.MET.result.1$Class))
+
+PC.MET.result.1 <- PC.MET.result.1[order(PC.MET.result.1$Class),]
+
+PC.MET.result.1$substrates <- factor(PC.MET.result.1$substrates,levels = unique(PC.MET.result.1$substrates))
+
+
+
+
+
+
+PC.MET.result.1$Time.h <- factor(PC.MET.result.1$Time.h)
+
+PC.0H.class <- PC.0H[1:32,]
+PC.0H.class <- PC.0H.class [order(PC.0H.class$Class,decreasing = T),]
+
+
+col <- car::recode(PC.0H.class$Class,' "Water"="grey";"Carboxylic acids"="#00468BFF";"Polymers"="#ED0000FF";"Carbohydrates"="#42B540FF";"Phenolic acids"="#0099B4FF";"Amino acids"="#925E9FFF";"Amines"="#FDAF91FF" ')
+
+
+ggplot(PC.MET.result.1, aes(x=Time.h,y=substrates))+
+  geom_tile(aes(fill=PC.foldchage),color="grey")+
+  scale_fill_gradient2(name="foldchage", low="#003366", high="purple", mid="white",midpoint = 0) +
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5,size=16,colour = 'black',face = 'italic')) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = col,face = 'italic')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = 'Amino acids'))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = NULL,x='Incubation time (h)')+
+  facet_wrap(~Species)
+
+```
+
+
+# 2 Figure S4 Carbohydrates
+
+```{r}
+PC.ECO.result <- read.csv('Eco-biolog.22.4.18-PC.BO.BV.csv',header=T)
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+
+PC.car.result <- subset(PC.ECO.result,PC.ECO.result$Class%in%c("Water","Carbohydrates"))
+
+
+PC.car.p <- compare_means(
+  OD590~substrates,
+  data=PC.car.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Time.h','Species'),
+  p.adjust.method = "holm")
+
+
+
+
+
+library(tidyverse)
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+PC.car.result %>%
+  mutate(Time_h=as.factor(Time.h)) %>% 
+  group_by(substrates) %>%
+  ggplot(aes(x = Time_h,y =OD590,
+           group=substrates,color=substrates)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5,size=16,colour = 'black',face = 'italic')) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = 'Carbohydrates'))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD590",x='Incubation time (h)')+
+  facet_wrap(~Species,scales = 'free_y')
+
+```
+
+# 3 Figure S4 Amino acids
+
+
+```{r}
+PC.ECO.result <- read.csv('Eco-biolog.22.4.18-PC.BO.BV.csv',header=T)
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+
+PC.aa.result <- subset(PC.ECO.result,PC.ECO.result$Class%in%c("Water","Amino acids"))
+
+
+PC.aa.p <- compare_means(
+  OD590~substrates,
+  data=PC.aa.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Time.h'),
+  p.adjust.method = "holm")
+
+
+
+
+
+library(tidyverse)
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+PC.aa.result %>%
+  mutate(Time_h=as.factor(Time.h)) %>% 
+  group_by(substrates) %>%
+  ggplot(aes(x = Time_h,y =OD590,
+           group=substrates,color=substrates)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5,size=16,colour = 'black',face = 'italic')) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = 'Amino acids'))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD590",x='Incubation time (h)')+
+  facet_wrap(~Species,scales = 'free_y')
+  
+```
+
+# 4 Figure S4 Carboxylic acids
+
+```{r}
+PC.ECO.result <- read.csv('Eco-biolog.22.4.18-PC.BO.BV.csv',header=T)
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+
+PC.aa.result <- subset(PC.ECO.result,PC.ECO.result$Class%in%c("Water","Carboxylic acids"))
+
+
+PC.aa.p <- compare_means(
+  OD590~substrates,
+  data=PC.aa.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Time.h'),
+  p.adjust.method = "holm")
+
+
+
+
+
+library(tidyverse)
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+PC.aa.result %>%
+  mutate(Time_h=as.factor(Time.h)) %>% 
+  group_by(substrates) %>%
+  ggplot(aes(x = Time_h,y =OD590,
+           group=substrates,color=substrates)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5,size=16,colour = 'black',face = 'italic')) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = 'Carboxylic acids'))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD590",x='Incubation time (h)')+
+  facet_wrap(~Species,scales = 'free_y')
+  
+```
+
+
+# 5 Figure S4 Polymers,Amines,Phenolic acids
+
+```{r}
+PC.ECO.result <- read.csv('Eco-biolog.22.4.18-PC.BO.BV.csv',header=T)
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+
+PC.aa.result <- subset(PC.ECO.result,PC.ECO.result$Class%in%c("Water","Polymers","Amines","Phenolic acids"))
+
+
+PC.aa.p <- compare_means(
+  OD590~substrates,
+  data=PC.aa.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Time.h'),
+  p.adjust.method = "holm")
+
+
+
+
+
+library(tidyverse)
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+PC.aa.result %>%
+  mutate(Time_h=as.factor(Time.h)) %>% 
+  group_by(substrates) %>%
+  ggplot(aes(x = Time_h,y =OD590,
+           group=substrates,color=substrates)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5,size=16,colour = 'black',face = 'italic')) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = "Others"))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD590",x='Incubation time (h)')+
+  facet_wrap(~Species,scales = 'free_y')
+  
+```
+
+
+
+
+
+
+
+
+
+
