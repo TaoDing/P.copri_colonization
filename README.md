@@ -36,7 +36,7 @@ Figures S1-S10. Supplementary figures in the article; for specific information, 
 
 
 ### Data Availability:
-The raw 16S rRNA gene and metagenomic sequencing data used in the present study have been deposited in the NCBI database under project ID PRJNA778894.
+The raw 16S rRNA gene and metagenomic sequencing data used in the present study have been deposited in the Genome Sequence Archive of the BIG Data Center at the Beijing Institute of Genomics database under project ID PRJCA017705.
 
 For any other code/analysis inquiries, please open a github issue.
 
