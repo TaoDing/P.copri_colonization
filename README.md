@@ -9,7 +9,7 @@ bash: bash scripts used to reproduce all tables that would be used for downstrea
 
 R.code: R scripts used to reproduce all statistical results and visualized pictures.
 
-Source Data: Including species feature table, subject's metadata, and results of in vitro culture experiments.
+Source Data: Including species feature table, subject's metadata,metabolome data and experiments data.
 
 Supplementary tables: Supplementary tables in the article.
 
