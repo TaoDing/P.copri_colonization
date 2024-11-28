@@ -1,0 +1,1085 @@
+---
+title: "Figure 2"
+---
+
+## library
+```{r,echo=TRUE}
+
+library(ggplot2)
+library(ggpubr)
+library(reshape2)
+library(vegan)
+library(ggrepel)
+library(magrittr)
+library(dplyr)
+library(plyr)
+library(readr)
+library(patchwork)
+library(RColorBrewer)
+library(car)
+library(ggsci)
+library(tidyverse)
+
+
+mypal2 <- ggsci::pal_lancet( alpha = 0.8)(9) 
+mypal1 <- ggsci::pal_npg( alpha = 0.8)(9)
+
+```
+
+
+## Figure 2a
+
+```{r,echo=T}
+
+sup.result <- read.csv('input/qPCR results of  PC+BO co-culture.txt',header=T,sep = '\t')
+
+
+
+
+
+
+p <- compare_means(
+  copies~Group,
+  data=sup.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Time','species'),
+  p.adjust.method = "holm")
+
+
+
+
+sup.result %>%
+  mutate(Time=as.factor(Time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Time,y =copies,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  facet_wrap(~species,scales = 'free_y')+
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black',face = 'italic')) +
+  theme(legend.title = element_text(size=14,colour = 'black'))+
+  scale_color_manual(values = mypal1)+
+   labs(y = "Copies*10^6/uL",x='Incubation time (h)')
+
+
+```## Figure 5A
+
+```{r,echo=T}
+library(vegan)
+library(ggsci)
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+
+
+metadata_meta <- read.csv('input//metadata_meta_107.csv',header=T,row.names = 1)
+metadata_meta <- subset(metadata_meta,metadata_meta$region=='rural')
+species <- read.table('input//kraken2_combined_unstratified_species.txt',header = T,sep = '\t',quote = "")
+tax <- read.table('input//kraken2_taxonomy.txt',header = T,sep = '\t',quote = "")
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species <- merge(species.tax,species,by='species')
+Bacteria <- subset(species,kingdom=='k__Bacteria')
+rownames(Bacteria) <- Bacteria$species
+Bacteria<- Bacteria[,c(8:114)]
+
+Bacteria <- as.data.frame(t(Bacteria))
+Bacteria.ra <- Bacteria/apply(Bacteria, 1, sum)*100
+Bacteria.ra$seq_ID <- rownames(Bacteria.ra)
+Bacteria.ra <- merge(metadata_meta,Bacteria.ra,by='seq_ID')
+rownames(Bacteria.ra) <- Bacteria.ra$seq_ID
+Bacteria.ra <- Bacteria.ra[,-c(1:8)]
+Bacteria.ra <- na.omit(Bacteria.ra)
+Bacteria.ra <- Bacteria.ra[Bacteria.ra$Prevotella_copri<20,]
+bray <- as.matrix(vegdist(Bacteria.ra,"bray"))
+rownames(metadata_meta) <- metadata_meta$seq_ID
+metadata_meta <- metadata_meta[rownames(bray),]
+bray <- bray[rownames(metadata_meta), rownames(metadata_meta)] 
+
+
+rural.met <- subset(metadata_meta,region=='rural')
+rural.bray <- bray[rownames(rural.met), rownames(rural.met)] 
+
+ adonis(rural.bray~rural.met$relocation.years)$aov.tab
+
+
+
+
+
+
+
+group_Baseline_Year1= subset(metadata_meta, relocation.years %in% c("Baseline","Year1"))
+sub_dis1 = bray[rownames(group_Baseline_Year1),rownames(group_Baseline_Year1)]
+adon.result1<-adonis(sub_dis1 ~ group_Baseline_Year1$group)$aov.tab
+
+
+group_Baseline_Year2= subset(metadata_meta, relocation.years %in% c("Baseline","Year2"))
+sub_dis2 = bray[rownames(group_Baseline_Year2),rownames(group_Baseline_Year2)]
+adon.result2<-adonis(sub_dis2 ~ group_Baseline_Year2$group)$aov.tab
+
+
+group_Year1_Year2 = subset(metadata_meta,  relocation.years %in% c("Year1","Year2"))
+sub_dis3 = bray[rownames(group_Year1_Year2),rownames(group_Year1_Year2)]
+adon.result3<-adonis(sub_dis3 ~ group_Year1_Year2$group)$aov.tab
+
+
+
+#PCOA 计算
+bray.pcoa <-  cmdscale(bray, k=2, eig=T) # k is dimension,  eig is eigenvalues
+bray.points <-  as.data.frame(bray.pcoa$points) # get coordinate string, format to dataframme
+colnames(bray.points) = c("x", "y") 
+bray.eig <- bray.pcoa$eig
+#添加样品组信息：合并PCoA坐标与实验设计
+bray.points <-  cbind(bray.points,rural.met[match(rownames(bray.points), rownames(rural.met)), ])
+
+
+bray.points <- na.omit(bray.points)
+
+bray.points$relocation.years <- car::recode(bray.points$relocation.years,' "Baseline"="Baseline";"Year1"="Y1";"Year2"="Y2" ')
+
+
+
+
+
+ggscatter(bray.points,x="x",y="y",
+              color="relocation.years",
+              fill="relocation.years",
+              palette=ggsci::pal_npg( alpha = 1)(3) ,
+              shape=21,
+              size=2,
+              ellipse=T,
+              ellipse.level=0.5,
+              linetype = "solid",
+              title="LPC (P=0.002)",
+              legend="right",
+  xlab =paste("PCoA 1 (", format(100 * bray.eig[1] / sum(bray.eig), digits=4), "%)", sep=""),
+  ylab=paste("PCoA 2 (", format(100 * bray.eig[2] / sum(bray.eig), digits=4), "%)", sep=""),
+    ggtheme=theme_cleveland()+  
+    theme(plot.title = element_text(hjust = 0.5,size=15))+
+    theme(axis.title.x =element_text(size=14,color = 'black'),
+          axis.title.y=element_text(size=14,color = 'black'),#设置x.y标题上文本的名称
+          axis.text.x = element_text(size=14,color = 'black'),
+          axis.text.y = element_text(size=14,color = 'black'),
+          legend.title = element_blank(),
+          legend.text = element_text(size=14,color = 'black')))
+
+
+
+```# Figure 5A
+
+```{r global_options, iNegativelude=FALSE}
+mypal1 <- ggsci::pal_lancet( alpha = 1)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.5)(9)
+
+library(vegan)
+library(ggpubr)
+library(ggplot2)
+library(reshape2)
+
+
+
+
+metadata_meta <- read.csv('input/metadata_meta_107.csv',header=T,row.names = 1)
+species <- read.table('input/kraken2_combined_unstratified_species.txt',header = T,sep = '\t',quote = "")
+tax <- read.table('input/kraken2_taxonomy.txt',header = T,sep = '\t',quote = "")
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species <- merge(species.tax,species,by='species')
+Bacteria <- subset(species,kingdom=='k__Bacteria')
+rownames(Bacteria) <- Bacteria$species
+Bacteria<- Bacteria[,c(8:114)]
+
+Bacteria <- as.data.frame(t(Bacteria))
+Bacteria.ra <- Bacteria/apply(Bacteria, 1, sum)*100
+Bacteria.ra$seq_ID <- rownames(Bacteria.ra)
+Bacteria.ra <- merge(metadata_meta,Bacteria.ra,by='seq_ID')
+rownames(Bacteria.ra) <- Bacteria.ra$seq_ID
+Bacteria.ra <- Bacteria.ra[,-c(1:8)]
+Bacteria.ra <- na.omit(Bacteria.ra)
+Bacteria.ra <- Bacteria.ra[Bacteria.ra$Prevotella_copri>20,]
+bray <- as.matrix(vegdist(Bacteria.ra,"bray"))
+rownames(metadata_meta) <- metadata_meta$seq_ID
+metadata_meta <- metadata_meta[rownames(bray),]
+bray <- bray[rownames(metadata_meta), rownames(metadata_meta)] 
+
+
+rural.met <- subset(metadata_meta,region=='rural')
+rural.bray <- bray[rownames(rural.met), rownames(rural.met)] 
+
+
+rural.adonis <-  adonis(rural.bray~rural.met$relocation.years)$aov.tab
+
+
+
+
+
+
+
+group_Baseline_Year1= subset(metadata_meta, relocation.years %in% c("Baseline","Year1"))
+sub_dis1 = bray[rownames(group_Baseline_Year1),rownames(group_Baseline_Year1)]
+adon.result1<-adonis(sub_dis1 ~ group_Baseline_Year1$group)$aov.tab
+
+
+group_Baseline_Year2= subset(metadata_meta, relocation.years %in% c("Baseline","Year2"))
+sub_dis2 = bray[rownames(group_Baseline_Year2),rownames(group_Baseline_Year2)]
+adon.result2<-adonis(sub_dis2 ~ group_Baseline_Year2$group)$aov.tab
+
+
+group_Year1_Year2 = subset(metadata_meta,  relocation.years %in% c("Year1","Year2"))
+sub_dis3 = bray[rownames(group_Year1_Year2),rownames(group_Year1_Year2)]
+adon.result3<-adonis(sub_dis3 ~ group_Year1_Year2$group)$aov.tab
+
+
+
+#PCOA 计算
+bray.pcoa <-  cmdscale(bray, k=2, eig=T) # k is dimension,  eig is eigenvalues
+bray.points <-  as.data.frame(bray.pcoa$points) # get coordinate string, format to dataframme
+colnames(bray.points) = c("x", "y") 
+bray.eig <- bray.pcoa$eig
+#添加样品组信息：合并PCoA坐标与实验设计
+bray.points <-  cbind(bray.points,rural.met[match(rownames(bray.points), rownames(rural.met)), ])
+
+
+bray.points <- na.omit(bray.points)
+
+
+bray.points$relocation.years <- car::recode(bray.points$relocation.years,' "Baseline"="Baseline";"Year1"="Y1";"Year2"="Y2" ')
+
+
+
+
+
+ggscatter(bray.points,x="x",y="y",
+              color="relocation.years",
+              fill="relocation.years",
+              palette=ggsci::pal_npg( alpha = 1)(3) ,
+              shape=21,
+              size=2,
+              ellipse=T,
+              ellipse.level=0.5,
+              linetype = "solid",
+              title="HPC (P=0.11)",
+              legend="right",
+  xlab =paste("PCoA 1 (", format(100 * bray.eig[1] / sum(bray.eig), digits=4), "%)", sep=""),
+  ylab=paste("PCoA 2 (", format(100 * bray.eig[2] / sum(bray.eig), digits=4), "%)", sep=""),
+    ggtheme=theme_cleveland()+  
+    theme(plot.title = element_text(hjust = 0.5,size=15))+
+    theme(axis.title.x =element_text(size=14,color = 'black'),
+          axis.title.y=element_text(size=14,color = 'black'),#设置x.y标题上文本的名称
+          axis.text.x = element_text(size=14,color = 'black'),
+          axis.text.y = element_text(size=14,color = 'black'),
+          legend.title = element_blank(),
+          legend.text = element_text(size=14,color = 'black')))
+
+
+```
+
+# Figure S5
+
+```{r,echo=T}
+
+species <- read.table('input/metaphlan2_merged_species.txt',header = T,sep='\t')
+tax <- read.table('input/tax.txt',header = T,sep='\t')
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species.tax <- species.tax[!duplicated(species.tax$species), ] # 去重复
+species <- merge(species.tax,species,by='species')
+
+Bacteria <- subset(species,kingdom=='Bacteria')
+rownames(Bacteria) <- Bacteria$species
+
+Bacteria.ra <- Bacteria[,c(8:114)]
+Bacteria.ra <- as.data.frame(t(Bacteria.ra))
+
+
+metadata_meta <- read.csv('input/metadata_meta_107.csv',header=T,row.names = 1)
+
+
+
+Bacteria.ra$seq_ID <- rownames(Bacteria.ra)
+
+
+Bacteria.ra <- merge(metadata_meta,Bacteria.ra,by='seq_ID')
+
+
+Bacteria.ra <- subset(Bacteria.ra,region=='rural')
+
+Bacteria.ra$PC <- car::recode(Bacteria.ra$Prevotella_copri," 0:20='LPC';else='HPC'")
+
+mean(Bacteria.ra$Prevotella_copri)
+
+
+
+
+ggplot(Bacteria.ra, aes(Bacteria.ra$Prevotella_copri)) +
+  geom_density(alpha = 1,color='red',size=1)+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,face='italic',colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  xlab('P. copri Abundance(%)')+
+  ylab('Density')+
+  geom_vline(aes(xintercept=20.1),size=1)+
+  annotate(geom = "text", x = 21, y = 0.016, 
+    label = 'mean=20.1', hjust = 0, vjust = 1, size = 4)
+
+
+
+
+
+
+
+
+stratified.pathway <- read.csv('input/humann2_pathabundance_cpm_stratified.tsv',header=T,sep ="\t")
+
+stratified.pathway <- stratified.pathway[-which(stratified.pathway$pathway_ID%in%'UNINTEGRATED'),]
+
+
+
+
+
+p.copri.pathway <- subset(stratified.pathway,species=='s__Prevotella_copri')
+rownames(p.copri.pathway) <- p.copri.pathway$pathway
+p.copri.pathway <-p.copri.pathway[,-c(1:5)]
+p.copri.pathway <- as.data.frame(t(p.copri.pathway))
+
+p.copri.pathway$seq_ID <- row.names(p.copri.pathway)
+
+p.copri.pathway <- merge(Bacteria.ra[,c(1:8,333)],p.copri.pathway,by='seq_ID')
+
+
+p.copri.pathway.long <- melt(p.copri.pathway)
+
+
+
+
+
+
+
+
+
+
+
+pathway <- read.table('input/humann2_pathabundance_cpm_unstratified.tsv',header = T,sep='\t',row.names = 1)
+pathway <- as.data.frame(t(pathway))
+
+pathway$seq_ID <- rownames(pathway)
+pathway <- merge(Bacteria.ra[,c(1:8,333)],pathway,by='seq_ID')
+
+#write.table(pathway,'pathway_lefse/pathway_PC.txt',sep='\t')
+
+
+
+Pathway.lefse <- read.table('pathway_lefse/pathway_PC.lefse_internal_res',header = T,sep='\t')
+
+tax <- read.csv('input/pathway.tax.csv',header = T)
+Pathway.lefse <- merge(tax,Pathway.lefse,by='pathway_ID')
+
+Pathway.lefse_3 <- subset(Pathway.lefse,LDA.1>3.2)
+Pathway.lefse_3 <- Pathway.lefse_3[order(Pathway.lefse_3$LDA,decreasing = F),]
+rownames(Pathway.lefse_3) <- Pathway.lefse_3$pathway
+
+ggplot(data = Pathway.lefse_3 , mapping = aes(x = reorder(pathway,-LDA),  y = LDA, fill = enriched_group))+
+    geom_bar(stat = 'identity', position = 'identity') +
+     xlab('')+
+     ylab('LDA Scores')+
+     ggtitle('')+
+     coord_flip()+
+  theme_cleveland()+ 
+  theme(legend.title = element_blank(),legend.position="right",legend.text =element_text(size=14,colour = 'black') )+ # 不显示图例的标题
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,face = 'italic',colour = 'black'))+
+   ggsci::scale_color_npg(alpha = 0.8)+
+  ggsci::scale_fill_npg(alpha = 0.8)
+
+
+
+
+
+
+
+
+
+stratified.pathway <- read.csv('input/humann2_pathabundance_cpm_stratified.tsv',header=T,sep ="\t",na.strings=c("","NA"))
+
+stratified.pathway <- stratified.pathway[-which(stratified.pathway$pathway_ID%in%'UNINTEGRATED'),]
+
+p.copri.pathway <- subset(stratified.pathway,species=='s__Prevotella_copri')
+
+metadata_meta <- read.csv('input/metadata_meta_107.csv',header=T,row.names = 2)
+
+GRDB<- subset(stratified.pathway,pathway%in%unique(Pathway.lefse_3$pathway))
+GRDB$genus <- as.character(GRDB$genus)
+GRDB$species <- as.character(GRDB$species)
+
+
+
+
+GRDB$species[is.na(GRDB$species)] <- GRDB$genus[is.na(GRDB$species)] #数据框species水平这一例的NA值用genus水平这一列的单元格替换。
+
+GRDB.long <- melt(GRDB)
+
+GRDB.long$seq_ID <- GRDB.long$variable
+GRDB.long <- merge(GRDB.long,Bacteria.ra[,c(1:8,333)],by='seq_ID')
+
+TOP.species <- data.frame('mean'=colMeans(Bacteria.ra[,c(9:332)]))
+
+TOP.species <- subset(TOP.species,mean>0.3)
+
+
+
+TOP.genus <- c('g__Prevotella','g__Faecalibacterium','g__Bacteroides','g__Bifidobacterium','g__Eubacterium')
+
+
+
+
+mypal1 <- ggsci::pal_lancet( alpha = 1)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 1)(9)
+
+
+GRDB.long <- subset(GRDB.long,GRDB.long$genus%in%TOP.genus)
+
+GRDB.long$species <- gsub('s__','',GRDB.long$species,fixed = T)
+GRDB.long <- subset(GRDB.long,GRDB.long$species%in%row.names(TOP.species))
+
+
+
+
+# 桑基图展示通路的贡献度
+
+
+
+
+#整合分类和丰度的嵌套关系，构建桑基图 link 列表
+link <- GRDB.long[,c('genus', 'species', 'value')]
+colnames(link) <- c('source', 'target', 'abundance')
+
+
+
+
+# family_genus <- genus[c('genus', 'species', 'value')]
+# names(family_genus) <- c('source', 'target', 'abundance')
+
+
+pathway_genus <- aggregate(GRDB.long$value, by = list(GRDB.long$pathway, GRDB.long$genus), FUN = sum)
+names(pathway_genus) <- c('source', 'target', 'abundance')
+
+
+genus_species <- aggregate(GRDB.long$value, by = list(GRDB.long$genus, GRDB.long$species), FUN = sum)  
+
+names(genus_species) <- c('source', 'target', 'abundance')
+                          
+ 
+link_list <- rbind(pathway_genus, genus_species)
+
+
+
+
+#构建 node 列表，并为 link 列表中的分类名称分配 id 指代
+node_list <- reshape2::melt(GRDB.long,id = 'value')
+
+
+
+
+node_list <- data.frame(GRDB.long[,c('pathway','genus','species','value')])
+
+node_list <- melt(node_list,id.vars = 'value')
+node_list <- node_list[,-1]
+
+
+node_list <- node_list[!duplicated(node_list$value), ]
+head(node_list)
+ 
+link_list$IDsource <- match(link_list$source, node_list$value) - 1 
+link_list$IDtarget <- match(link_list$target, node_list$value) - 1
+head(link_list)
+
+
+library(networkD3)
+
+sankeyNetwork(Links = link_list, Nodes = node_list,
+    Source = 'IDsource', Target = 'IDtarget', Value = 'abundance', 
+    NodeID = 'value', NodeGroup = 'variable', 
+    fontSize = 12, sinksRight = FALSE)
+
+
+
+
+
+sankeyNetwork(Links = link_list, Nodes = node_list,
+    Source = 'IDsource', Target = 'IDtarget',
+    Value = 'abundance', 
+    NodeID = 'value', NodeGroup = 'variable', 
+    nodePadding = 50, nodeWidth = 20, fontSize = 12,  height = 300, width = 800)
+
+sankeyNetwork(Links = link_list, Nodes = node_list,
+    Source = 'IDsource', Target = 'IDtarget', Value = 'abundance', 
+    NodeID = 'value', NodeGroup = 'variable', 
+    fontSize = 0, sinksRight = FALSE)
+
+
+
+P1 <- sankeyNetwork(Links = link_list, Nodes = node_list,
+    Source = 'IDsource', Target = 'IDtarget', Value = 'abundance', 
+    NodeID = 'value', NodeGroup = 'variable', 
+    fontSize = 0, sinksRight = FALSE)
+
+
+
+
+
+# saveNetwork(P1,"output/sankey.html")
+
+
+
+
+
+
+
+
+```
+
+
+
+# Figure 2b
+
+```{r}
+
+species.ra <- read.csv('input/species.ra1_4.csv')
+
+pathway <- read.csv('input/pathway.ra.1_4.csv',row.names = 1)
+
+met <- read.csv('input/met_2021.csv')
+
+
+
+species.ra <- merge(met,species.ra,by='X')
+stool.ra <- subset(species.ra,species.ra$body_site=='stool')
+
+
+colnames(stool.ra) <- gsub(' ','_',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub('[','',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub(']','',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub('.','',colnames(stool.ra),fixed = T)
+
+
+row.names(stool.ra) <- stool.ra$X
+
+
+
+
+mean(stool.ra$s__Prevotella_copri)
+
+table(stool.ra$study_name)
+
+table(stool.ra$study_name,stool.ra$country)
+
+ggplot(data=stool.ra,aes(x=log2(s__Prevotella_copri)))+
+  geom_histogram(color='black',fill="#E64B35E5",alpha=0.5,
+                 aes(y=..density..))+
+  geom_density(alpha = 1,color='black',size=1)+
+   theme_classic() + 
+  ggtitle('Distribution of P. copri (n=1584)')+
+  
+  labs( y = 'Density',x='log2 (Abundance %)') +
+  theme(
+        axis.text.x=element_text(colour = 'black',size=14),
+        axis.title.x=element_text(colour = 'black',size=14),
+        axis.text.y=element_text(colour = 'black',size=14),
+        axis.title.y =element_text(colour = 'black',size=14),
+        strip.background = element_blank(),
+        strip.text = element_text(colour = 'black',size=14)) + 
+  theme(legend.position = "right",
+        legend.text =element_text(colour = 'black',size=14),
+        legend.title =element_blank() ) + 
+  theme(panel.grid=element_blank()) +    
+  theme(panel.border=element_blank())   
+
+
+
+
+ggplot(data=stool.ra,aes(x=log2(s__Bacteroides_ovatus)))+
+  geom_histogram(color='black',fill="#E64B35E5",alpha=0.5,
+                 aes(y=..density..))+
+  geom_density(alpha = 1,color='black',size=1)+
+   theme_classic() + 
+  ggtitle('Distribution of B. ovatus (n=1584)')+
+  
+  labs( y = 'Density',x='log2 (Abundance %)') +
+  theme(
+        axis.text.x=element_text(colour = 'black',size=14),
+        axis.title.x=element_text(colour = 'black',size=14),
+        axis.text.y=element_text(colour = 'black',size=14),
+        axis.title.y =element_text(colour = 'black',size=14),
+        strip.background = element_blank(),
+        strip.text = element_text(colour = 'black',size=14)) + 
+  theme(legend.position = "right",
+        legend.text =element_text(colour = 'black',size=14),
+        legend.title =element_blank() ) + 
+  theme(panel.grid=element_blank()) +    
+  theme(panel.border=element_blank())   
+
+
+```
+
+# Figure 2c and Figure S6
+
+```{r,echo=T}
+
+
+pathway <- read.table('input/humann2_pathabundance_cpm_unstratified.tsv',header = T,sep='\t',row.names = 1)
+
+tax <- read.csv('input/pathway.tax.csv',header = T)
+
+pathway$pathway_ID <- row.names(pathway)
+pathway <- merge(tax,pathway,by='pathway_ID')
+
+row.names(pathway) <- pathway$pathway
+
+
+pathway <- as.data.frame(t(pathway[,-c(1:4)]))
+
+pathway <- pathway[,unique(p.copri.pathway$pathway)]
+
+pathway$seq_ID <- rownames(pathway)
+pathway <- merge(pathway,Bacteria.ra[,c(1:8,333,263)],by='seq_ID')
+
+rownames(pathway) <- pathway$seq_ID
+
+
+
+pathway.long <- melt(pathway,id.vars = colnames(pathway[,c(1,9:17)]))
+
+
+
+
+ggplot(data=pathway.long, aes(y=pathway.long$Prevotella_copri,x=pathway.long$value,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=pathway.long, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle(NULL)+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  ggsci::scale_color_npg(alpha = 0.8)+
+  ggsci::scale_fill_npg(alpha = 0.8)+
+  facet_wrap(~variable)
+
+
+pathway.long.1 <- subset(pathway.long,variable%in%c(' adenosine ribonucleotides de novo biosynthesis',' guanosine ribonucleotides de novo biosynthesis'))
+
+
+
+ggplot(data=pathway.long.1, aes(y=pathway.long.1$Prevotella_copri,x=pathway.long.1$value,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=pathway.long.1, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle(NULL)+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  ggsci::scale_color_npg(alpha = 0.8)+
+  ggsci::scale_fill_npg(alpha = 0.8)+
+  facet_wrap(~variable)
+
+```
+
+```{r,echo=T}
+species.ra <- read.csv('input/species.ra1_4.csv')
+
+pathway <- read.csv('input/pathway.ra.1_4.csv',row.names = 1)
+
+met <- read.csv('input/met_2021.csv')
+
+
+
+species.ra <- merge(met,species.ra,by='X')
+stool.ra <- subset(species.ra,species.ra$body_site=='stool')
+
+
+colnames(stool.ra) <- gsub(' ','_',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub('[','',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub(']','',colnames(stool.ra),fixed = T)
+colnames(stool.ra) <- gsub('.','',colnames(stool.ra),fixed = T)
+
+
+row.names(stool.ra) <- stool.ra$X
+
+
+
+pathway <- pathway[stool.ra$X,]
+
+
+cor.p <- matrix(nrow=ncol(pathway),ncol=1)
+
+# 求相关系数
+for(i in 1:ncol(pathway))
+    {cor.p[i,]<- cor.test(stool.ra$s__Prevotella_copri,pathway[,i],method = 'spearman')$p.value
+  }
+
+rownames(cor.p) <- colnames(pathway)
+
+
+cor.r <- matrix(nrow=ncol(pathway),ncol=1)
+
+for(i in 1:ncol(pathway))
+    {cor.r[i,]<-cor.test(stool.ra$s__Prevotella_copri,pathway[,i],method = 'spearman')$estimate
+  }
+
+rownames(cor.r) <- colnames(pathway)
+#cor.r[cor.p>0.05|abs(cor.r)<0.2] = NA
+cor.r <- as.data.frame(cor.r)
+cor.r$pathway <- rownames(cor.r)
+
+
+
+
+
+
+
+
+
+
+pathway.a <- grep(c('adenosine'),cor.r$pathway)
+pathway.g <- grep(c('guanosine'),cor.r$pathway)
+pathway.i <- grep(c('inosine'),cor.r$pathway)
+
+
+pathway.nc <- pathway[,c(pathway.a,pathway.g,pathway.i)]
+
+
+cor.r.1 <- cor.r[c(pathway.a,pathway.g,pathway.i),]
+
+
+
+stool.ra$PC <- car::recode(stool.ra$s__Prevotella_copri,"5:100='HPC';else='LPC'")
+
+
+stool.ra$Bo <- car::recode(stool.ra$s__Bacteroides_ovatus,"5:100='HBo';else='LBo'")
+
+
+
+stool.ra$Bv <- car::recode(stool.ra$s__Bacteroides_vulgatus,"5:100='HBv';else='LBv'")
+
+library(ggpubr)
+stool.ra <- subset(stool.ra,stool.ra$country%in%c('SWE'))
+pathway.nc.1 <- pathway.nc[stool.ra$X,]
+
+mean(stool.ra$s__Prevotella_copri)
+
+
+table(stool.ra$study_name)
+table(stool.ra$study_name,stool.ra$PC)
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$PWY.7221..guanosine.ribonucleotides.de.novo.biosynthesis,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle('PWY7221-guanosine ribonucleotides 
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$PWY.7219..adenosine.ribonucleotides.de.novo.biosynthesis,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle('PWY7219-adenosine ribonucleotides 
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+
+
+
+
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$SALVADEHYPOX.PWY..adenosine.nucleotides.degradation.II,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle('Adenosine nucleotides degradation II')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$PWY.6126..superpathway.of.adenosine.nucleotides.de.novo.biosynthesis.II,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle('PWY6126-superpathway of adenosine 
+          nucleotides denovo biosynthesisII')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$PWY.6609..adenine.and.adenosine.salvage.III,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle('PWY6609-adenine and adenosine salvage III')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+
+
+
+
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$PWY.6608..guanosine.nucleotides.degradation.III,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle('PWY6608-guanosine nucleotides
+          degradation III')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$PWY.6123..inosine.5..phosphate.biosynthesis.I,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle('PWY6123-inosine-5-phosphate biosynthesis I')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$PWY.5695..urate.biosynthesis.inosine.5..phosphate.degradation,
+                          fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "P. copri (%)", x = "CPM")+
+  ggtitle('PWY5695-urate biosynthesis 
+          inosine-5-phosphate degradation')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Bacteroides_ovatus,x=1000*pathway.nc.1$PWY.7221..guanosine.ribonucleotides.de.novo.biosynthesis,fill=Bo,group=Bo,color=Bo))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "B.ovatus (%)", x = "CPM")+
+  ggtitle('PWY7221-guanosine ribonucleotides \n
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Bacteroides_ovatus,x=1000*pathway.nc.1$PWY.7219..adenosine.ribonucleotides.de.novo.biosynthesis,fill=Bo,group=Bo,color=Bo))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "B.ovatus (%)", x = "CPM")+
+  ggtitle('7219-adenosine ribonucleotides \n
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Bacteroides_vulgatus,x=1000*pathway.nc.1$PWY.7221..guanosine.ribonucleotides.de.novo.biosynthesis,fill=Bv,group=Bv,color=Bv))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "B.vulgatus(%)", x = "CPM")+
+  ggtitle('PWY7221-guanosine ribonucleotides \n
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Bacteroides_vulgatus,x=1000*pathway.nc.1$PWY.7219..adenosine.ribonucleotides.de.novo.biosynthesis,fill=Bv,group=Bv,color=Bv))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman")+
+labs(y = "B.vulgatus(%)", x = "CPM")+
+  ggtitle('7219-adenosine ribonucleotides \n
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0,100)
+
+
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=1000*pathway.nc.1$PWY.7219..adenosine.ribonucleotides.de.novo.biosynthesis,fill=PC,group=PC,color=PC))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman",)+
+labs(y = "P. copri(%)", x = "CPM")+
+  ggtitle('7219-adenosine ribonucleotides \n
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0.01,100)
+
+
+
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=pathway.nc.1$PWY.7219..adenosine.ribonucleotides.de.novo.biosynthesis*1000,fill="#E64B35E5",color="#E64B35E5"))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman",)+
+labs(y = "P. copri(%)", x = "CPM")+
+  ggtitle('7219-adenosine ribonucleotides \n
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0.001,100)
+
+
+
+ggplot(data=stool.ra, aes(y=stool.ra$s__Prevotella_copri,x=pathway.nc.1$PWY.7221..guanosine.ribonucleotides.de.novo.biosynthesis*1000,fill="#E64B35E5",color="#E64B35E5"))+ geom_point(size=2)+stat_smooth(method="lm",se=T)+
+  stat_cor(data=stool.ra, method = "spearman",)+
+labs(y = "P. copri(%)", x = "CPM")+
+  ggtitle('7221-guanosine ribonucleotides \n
+          denovo biosynthesis')+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  ylim(0.002,100)
+
+
+
+```
