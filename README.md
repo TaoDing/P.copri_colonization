@@ -17,26 +17,25 @@ Supplementary tables: Supplementary tables in the article.
 ### Processiong Data:
 
 
-Figure 1. P. copri dominated the gut microbiota and maintained a continuous colonization.
+Figure 1. P. copri maintained stable colonization in the gut despite changes in the host’s diet..
 
-Figure 2. Colonization of P. copri in population was accompanied by a reduction in B. ovatus. 
+Figure 2. P. copri could compete with B. ovatus for utilization of multiple substrates and were superior to the latter in ATP synthesis.
 
-Figure 3. Supernatant feeding experiments showed that P. copri could utilize the metabolites of Bacteroides and regulate the growth of commensal bacteria.
+Figure 3. Supernatant feeding experiments revealed that the growth of P. copri could be promoted by B. ovatus supernatant.
 
-Figure 4. Mice co-colonization experiments showed that the colonization of P. copri was promoted by B. ovatus metabolites to obtain more carbohydrates.
+Figure 4. The supplementation of the supernatant of B. ovatus culture significantly promotes P. copri colonization in the gut of antibiotic pre-treated mice. 
 
-Figure 5.P. copri was superior to B. ovatus in nucleotide metabolism to synthesize ATP.
+Figure 5.The outer membrane vesicles of B. ovatus significantly promoted the growth of P. copri. 
 
-Figure 6. P. copri metabolized 2'-deoxyadenosine via dak enzyme to support growth in auxotrophic condition.
+Figure 6. The OMVs of B. ovatus significantly promoted the P. copri colonization in the gut of antibiotic pre-treated mice.
 
-Figure 7. High prevalence of dak on P. copri Clade A promoted its emergence as the dominant subspecies.
 
-Figures S1-S10. Supplementary figures in the article; for specific information, please visit our original article.
+Figures S1-S7. Supplementary figures in the article; for specific information, please visit our original article.
 
 
 
 ### Data Availability:
-The raw 16S rRNA gene and metagenomic sequencing data used in the present study have been deposited in the Genome Sequence Archive of the BIG Data Center at the Beijing Institute of Genomics database under project ID PRJCA017705.
+The raw 16S rRNA gene and metagenomic sequencing data used in the present study have been deposited in the Genome Sequence Archive of the BIG Data Center at the Beijing Institute of Genomics database under project ID PRJCA017705. All the raw metabolomics data is accessible in Table S6, Table S7, and Table S8.
 
 For any other code/analysis inquiries, please open a github issue.
 
