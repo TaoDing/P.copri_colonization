@@ -1,0 +1,341 @@
+---
+title: "Figure 4"
+---
+
+## library
+```{r,echo=TRUE}
+
+library(ggplot2)
+library(ggpubr)
+library(reshape2)
+library(vegan)
+library(ggrepel)
+library(magrittr)
+library(dplyr)
+library(plyr)
+library(readr)
+library(patchwork)
+library(RColorBrewer)
+library(car)
+library(ggsci)
+library(tidyverse)
+
+```
+
+
+## Figure 4A
+
+```{r,echo=T}
+metadata_meta <- read.csv('input/metadata_meta_107.csv',header=T,row.names = 1)
+species <- read.table('input/kraken2_combined_unstratified_species.txt',header = T,sep = '\t',quote = "")
+tax <- read.table('input/kraken2_taxonomy.txt',header = T,sep = '\t',quote = "")
+P.tax <- subset(tax,tax$genus%in%'Prevotella')
+
+P.species <- merge(P.tax,species,by='species')
+
+rownames(P.species) <- P.species$species
+
+P.species<- P.species[,c(8:114)]
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species <- merge(species.tax,species,by='species')
+
+
+
+
+P.species <- as.data.frame(t(P.species))
+
+
+
+Bacteria <- subset(species,kingdom=='k__Bacteria')
+rownames(Bacteria) <- Bacteria$species
+Bacteria<- Bacteria[,c(8:114)]
+
+Bacteria <- as.data.frame(t(Bacteria))
+Bacteria.ra <- Bacteria/apply(Bacteria, 1, sum)*100
+Bacteria.ra$seq_ID <- rownames(Bacteria.ra)
+Bacteria.ra <- merge(metadata_meta,Bacteria.ra,by='seq_ID')
+rownames(Bacteria.ra) <- Bacteria.ra$seq_ID
+Bacteria.ra <- Bacteria.ra[,-c(1:8)]
+Bacteria.ra <- na.omit(Bacteria.ra)
+
+
+Bacteria.ra.1 <- Bacteria.ra[,colMeans(Bacteria.ra)>0.5]
+meta_tibetan <- subset(metadata_meta ,national=='tibetan')
+Bacteria.ra.1 <- Bacteria.ra.1[meta_tibetan$seq_ID,] 
+
+
+Bacteria.ra.2 <- Bacteria.ra[,colnames(P.species)]
+Bacteria.ra.2 <- Bacteria.ra.2[,-1]
+Bacteria.ra.2 <- Bacteria.ra.2[rownames(Bacteria.ra.1),]
+
+Bacteria.ra.3 <- cbind(Bacteria.ra.1,Bacteria.ra.2)
+Bacteria.ra.3.mean <- data.frame('mean'=colMeans(Bacteria.ra.3))
+
+cor.p <- matrix(nrow=ncol(Bacteria.ra.3),ncol=1)
+
+
+for(i in 1:ncol(Bacteria.ra.3))
+    {cor.p[i,]<- cor.test(Bacteria.ra.3$Prevotella_copri,Bacteria.ra.3[,i],method = 'spearman')$p.value
+  }
+
+rownames(cor.p) <- colnames(Bacteria.ra.3)
+
+
+cor.r <- matrix(nrow=ncol(Bacteria.ra.3),ncol=1)
+
+for(i in 1:ncol(Bacteria.ra.3))
+    {cor.r[i,]<- cor.test(Bacteria.ra.3$Prevotella_copri,Bacteria.ra.3[,i],method = 'spearman')$estimate
+  }
+
+rownames(cor.r) <- colnames(Bacteria.ra.3)
+
+cor.r[cor.p>0.05|abs(cor.r)<0.3] = NA 
+cor.r <- as.data.frame(cor.r)
+cor.r$p.copri <- c('P.copri')
+cor.r$r <- cor.r$V1
+cor.r$species <- rownames(cor.r)
+cor.r <- na.omit(cor.r)
+cor.r <- subset(cor.r,r<1)
+
+Bacteria.ra.3.mean$species <- rownames(Bacteria.ra.3.mean)
+Bacteria.ra.3.mean <- Bacteria.ra.3.mean[rownames(cor.r),]
+
+Bacteria.ra.3.tax <- subset(species.tax,species%in%rownames(Bacteria.ra.3.mean))
+
+Bacteria.ra.3.tax <- merge(Bacteria.ra.3.tax,cor.r,by='species')
+Bacteria.ra.3.tax$species <- factor(Bacteria.ra.3.tax$species,levels = as.character(cor.r$species))
+
+rownames(Bacteria.ra.3.tax) <- Bacteria.ra.3.tax$species
+Bacteria.ra.3.tax <- Bacteria.ra.3.tax[order(Bacteria.ra.3.tax$species),]
+
+cor.r$species.1 <- gsub("Prevotella_","P.",cor.r$species,fixed = T)
+cor.r$species.1 <- gsub("Bacteroides_","B.",cor.r$species.1,fixed = T)
+cor.r$species.1 <- gsub("Ruminococcus_","R.",cor.r$species.1,fixed = T) 
+cor.r$species.1 <- gsub("Akkermansia_","A.",cor.r$species.1,fixed = T)
+cor.r$species.1 <- gsub("Alistipes_","A.",cor.r$species.1,fixed = T)
+cor.r$species.1 <- gsub("Bifidobacterium_","B.",cor.r$species.1,fixed = T) 
+cor.r$species.1 <- gsub("Blautia_","B.",cor.r$species.1,fixed = T)
+cor.r$species.1 <- gsub("Collinsella_","C.",cor.r$species.1,fixed = T)
+
+cor.r$species.1 <- gsub("Dysosmobacter_","D.",cor.r$species.1,fixed = T) 
+cor.r$species.1 <- gsub("Enterocloster_","E.",cor.r$species.1,fixed = T)
+cor.r$species.1 <- gsub("Faecalibacterium_","F.",cor.r$species.1,fixed = T)
+cor.r$species.1 <- gsub("Flavonifractor_","F.",cor.r$species.1,fixed = T) 
+cor.r$species.1 <- gsub("Parabacteroides_","P.",cor.r$species.1,fixed = T)
+cor.r$species.1 <- gsub("Roseburia_","R.",cor.r$species.1,fixed = T)
+cor.r$species.1 <- gsub("Ruthenibacterium_","R.",cor.r$species.1,fixed = T)
+
+
+
+cor.r$genus <- Bacteria.ra.3.tax$genus
+cor.r <- cor.r[order(cor.r$genus,decreasing = F),]
+
+cor.r$species.1 <- factor(cor.r$species.1,levels = as.character(cor.r$species.1) ) 
+
+mypal2 <- ggsci::pal_lancet( alpha = 0.6)(9) 
+mypal1 <- ggsci::pal_npg( alpha = 0.8)(9)
+
+
+library(ggpubr)
+ggplot(data =cor.r , mapping = aes(x = species.1,  y = r))+
+      geom_segment(aes(x = species.1, y =0, xend =species.1 , yend = r),size=2,color = '#E64B35CC',)+
+   geom_point(aes(fill = genus), color = 'black',size=6,shape=21) +
+     xlab(NULL)+
+     ylab('Significant correlation with P.copri')+
+     ylim(-1,1)+
+     ggtitle('')+
+  geom_hline(yintercept = 0)+
+  theme_cleveland()+ 
+  theme(legend.title = element_blank(),legend.position="top",
+        legend.text =element_text(size=14,colour="black",face = 'italic'))+ 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour="black"), axis.title.y=element_text(size=14,colour="black"))+ 
+  theme(axis.text.x = element_text(size=14,colour="black",face = 'italic',angle = 60,hjust = 1,vjust = 1),axis.text.y = element_text(size=14,colour="black"))+
+  scale_fill_manual(values = c(mypal1,mypal2))
+
+
+```
+
+
+
+
+## Figure 4B
+
+```{r,echo=T}
+
+
+metadata_meta <- read.csv('input/metadata_meta_107.csv',header=T,row.names = 1)
+species <- read.table('input/metaphlan2_merged_species.txt',header = T,sep='\t')
+tax <- read.table('input/tax.txt',header = T,sep='\t')
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species.tax <- species.tax[!duplicated(species.tax$species), ] 
+species <- merge(species.tax,species,by='species')
+
+Bacteria <- subset(species,kingdom=='Bacteria')
+rownames(Bacteria) <- Bacteria$species
+
+Bacteria.ra <- Bacteria[,c(8:114)]
+Bacteria.ra <- as.data.frame(t(Bacteria.ra))
+
+Bacteroides.tax <- subset(species.tax,genus%in%'Bacteroides')
+Bacteroides.ra <- Bacteria.ra[,Bacteroides.tax$species]
+Bacteroides.ra <- Bacteroides.ra[,colMeans(Bacteroides.ra)>0.1]
+
+Bacteroides.ra$seq_ID <- rownames(Bacteroides.ra)
+Bacteroides.ra <- merge(metadata_meta,Bacteroides.ra,by='seq_ID')
+Bacteroides.ra.long <- melt(Bacteroides.ra)
+
+Bacteroides.ra.long <- subset(Bacteroides.ra.long,national%in%'tibetan')
+
+Bacteroides.ra.long$variable <- gsub("Bacteroides_","B. ",Bacteroides.ra.long$variable,fixed = T)
+
+Bacteroides.ra.long$relocation.years <- car::recode(Bacteroides.ra.long$relocation.years,
+                                          "'1M'='Baseline'; '1Y'='Y1'; '2Y'='Y2'")
+
+
+B_ovatus <- subset(Bacteroides.ra.long,variable%in%'B. ovatus')
+
+
+
+
+
+Bacteroides.ra.mean <- aggregate(Bacteroides.ra.long$value,list(Bacteroides.ra.long$relocation.years,Bacteroides.ra.long$variable),median)
+
+colnames(Bacteroides.ra.mean) <- c('relocation.years','species','value')
+
+
+Bacteroides.ra.mean <- dcast(Bacteroides.ra.mean, species~relocation.years)
+
+
+Bacteroides.ra.mean <- Bacteroides.ra.mean[rowSums(Bacteroides.ra.mean[,-1])>0,]
+
+Bacteroides.ra.mean <- Bacteroides.ra.mean[order(Bacteroides.ra.mean$Baseline,decreasing = T),]
+
+Bacteroides.ra.mean$species <- factor(Bacteroides.ra.mean$species,levels = unique(as.character(Bacteroides.ra.mean$species)))
+
+
+
+mypal1 <- ggsci::pal_lancet( alpha = 0.8)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.8)(9)
+
+ggplot(melt(Bacteroides.ra.mean), aes(x=variable, y=value, fill=species)) + 
+  geom_bar(stat = "identity", width=0.5, col='black')  + 
+  geom_segment(data=Bacteroides.ra.mean %>% arrange(by=desc(species)) %>% mutate(Baseline=cumsum(Baseline)) %>% mutate(Y1=cumsum(Y1)), aes(x=1.25, xend=1.75, y=Baseline, yend=Y1))+ 
+  geom_segment(data=Bacteroides.ra.mean %>% arrange(by=desc(species)) %>% mutate(Y1=cumsum(Y1)) %>% mutate(Y2=cumsum(Y2)), aes(x=2.25, xend=2.75, y=Y1, yend=Y2))+
+  scale_y_continuous(expand=c(0,0))+
+   theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black',face = 'italic')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(fill = guide_legend(title = 'Bacteroides'))+
+  scale_fill_manual(values = c(mypal2,mypal1))+
+   labs(y = "Abundance(%)",x=NULL)
+
+
+```
+
+
+
+## Figure 4C
+
+
+```{r,echo=T}
+
+metadata_meta <- read.csv('input/metadata_meta_107.csv',header=T,row.names = 2)
+species <- read.table('input/metaphlan2_merged_species.txt',header = T,sep='\t')
+tax <- read.table('input/tax.txt',header = T,sep='\t')
+
+tibetan.met <- subset(metadata_meta,metadata_meta$national%in%c('tibetan'))
+
+species.tax <- data.frame(species=species$species)
+species.tax <- merge(tax,species.tax,by='species')
+species.tax <- species.tax[!duplicated(species.tax$species), ] 
+species <- merge(species.tax,species,by='species')
+
+Bacteria <- subset(species,kingdom=='Bacteria')
+rownames(Bacteria) <- Bacteria$species
+
+Bacteria.ra <- Bacteria[,c(8:114)]
+Bacteria.ra <- as.data.frame(t(Bacteria.ra))
+Bacteria.ra <- Bacteria.ra[rownames(tibetan.met),]
+
+
+
+top10.species <- data.frame('mean'=colMeans(Bacteria.ra))
+top10.species$species <- rownames(top10.species)
+top10.species <- top10.species[order(top10.species$mean,decreasing = T),]
+top10.species <- top10.species[c(1:10),]
+
+
+
+
+ggplot(data=Bacteria.ra,aes(x=Prevotella_copri,y=Bacteroides_ovatus))+ geom_point(size=2)+stat_smooth(method="lm",se=T,colour='red')+
+  stat_cor(data=Bacteria.ra, method = "spearman")+
+labs(x = "P. copri (%)", y = "B. ovatus (%)")+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank()) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,face='italic',colour = 'black'), axis.title.y=element_text(size=14,face='italic',colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))+
+  scale_fill_manual(values = c('red','#0012f8','#b200f8','#04f60b','#bf812d'))
+
+```
+
+## Figure 4D 
+
+```{r,echo=T}
+
+sup.result <- read.csv('input/qPCR results of  PC+BO co-culture.txt',header=T,sep = '\t')
+
+
+
+
+
+
+p <- compare_means(
+  copies~Group,
+  data=sup.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Time','species'),
+  p.adjust.method = "holm")
+
+
+
+
+sup.result %>%
+  mutate(Time=as.factor(Time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Time,y =copies,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  facet_wrap(~species,scales = 'free_y')+
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black',face = 'italic')) +
+  theme(legend.title = element_text(size=14,colour = 'black'))+
+  scale_color_manual(values = mypal1)+
+   labs(y = "Copies*10^6/uL",x='Incubation time (h)')
+
+
+```
