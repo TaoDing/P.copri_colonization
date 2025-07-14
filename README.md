@@ -1,4 +1,4 @@
-# S.copri_colonization
+# S. copri_colonization
 
 
 ## Segatella copri Exploits Bacteroides-derived vesicles for Intestinal Colonization via a dual competitive-exploitative strategy
@@ -16,11 +16,11 @@ Supplementary tables: Supplementary tables in the article.
 ### Processiong Data:
 
 
-Figure 1. S. copri maintained stable colonization in the gut despite changes in the host’s diet..
+Figure 1. S. copri maintained stable colonization in migrants moving from rural to urban areas.
 
 Figure 2. S. copri could compete with B. ovatus for utilization of multiple substrates and were superior to the latter in ATP synthesis.
 
-Figure 3. Supernatant feeding experiments revealed that the growth of S. copri could be promoted by B. ovatus supernatant.
+Figure 3. 3. Supernatant feeding experiments revealed that the growth of S. copri could be promoted by B. ovatus supernatant.
 
 Figure 4. The supplementation of the supernatant of B. ovatus culture significantly promotes S. copri colonization in the gut of antibiotic pre-treated mice. 
 
@@ -29,7 +29,7 @@ Figure 5.The outer membrane vesicles of B. ovatus significantly promoted the gro
 Figure 6. The OMVs of B. ovatus significantly promoted the S. copri colonization in the gut of antibiotic pre-treated mice.
 
 
-Figures S1-S7. Supplementary figures in the article; for specific information, please visit our original article.
+Figures S1-S8. Supplementary figures in the article; for specific information, please visit our original article.
 
 
 
