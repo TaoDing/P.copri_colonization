@@ -1,0 +1,635 @@
+---
+title: "Figure 5"
+output: html_document
+
+---
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## 配色
+```{r}
+
+mypal1 <- ggsci::pal_lancet( alpha = 1)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.5)(9)
+
+mypal3 <- ggsci::pal_lancet( alpha = 0.5)(9) 
+
+
+mypal4 <- ggsci::pal_npg( alpha = 0.3)(9) 
+
+
+```
+
+
+
+
+# Figure 5a
+
+```{r}
+sup1.result <- read.csv('input/上清OMV与去OMV实验结果23.6.30.csv',header=T)
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+sup1.result <- subset(sup1.result,sup1.result$Group%in%c("Pc","Pc+Bo-Sup","Pc+Bo-Sup (non-omv)"))
+
+
+
+p.bo <- compare_means(
+  OD600~Group,
+  data=sup1.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Incubation.time'),
+  p.adjust.method = "holm")
+
+
+
+
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+sup1.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+  
+
+
+
+
+
+
+
+ggplot(sup1.result, aes(x=Incubation.time, y =OD600,group=Group,color=Group)) + 
+  geom_point(position = position_jitter(width = 0.4, height = 0.05, seed = 123)) +
+  stat_smooth(method="loess",span = 0.5, se = TRUE, level = 0.95, aes(x=Incubation.time, y =OD600,group=Group,color=Group))+
+   theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')+
+  stat_summary(fun.y="mean",geom="point",size=3) +      
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)
+
+
+
+
+
+```
+
+# Figure 5a
+
+```{r global_options, iNegativelude=FALSE}
+sup1.result <- read.csv('input/上清OMV与去OMV实验结果23.6.30.csv',header=T)
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+sup1.result <- subset(sup1.result,sup1.result$Group%in%c("Pc","Pc+Bv-Sup","Pc+Bv-Sup (non-omv)"))
+
+
+
+p.bv <- compare_means(
+  OD600~Group,
+  data=sup1.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Incubation.time'),
+  p.adjust.method = "holm")
+
+
+
+
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+sup1.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+
+
+
+
+
+
+ggplot(sup1.result, aes(x=Incubation.time, y =OD600,group=Group,color=Group)) + 
+  geom_point(position = position_jitter(width = 0.4, height = 0.05, seed = 123)) +
+  stat_smooth(method="loess",span = 0.5, se = TRUE, level = 0.95, aes(x=Incubation.time, y =OD600,group=Group,color=Group))+
+   theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')+
+  stat_summary(fun.y="mean",geom="point",size=3) +      
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)
+
+
+
+
+
+```
+
+# Figure 5a
+
+```{r global_options, iNegativelude=FALSE}
+sup1.result <- read.csv('input/上清OMV与去OMV实验结果23.6.30.csv',header=T)
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+sup1.result <- subset(sup1.result,sup1.result$Group%in%c("Pc","Pc+Bp-Sup","Pc+Bp-Sup (non-omv)"))
+
+
+
+p.bp <- compare_means(
+  OD600~Group,
+  data=sup1.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Incubation.time'),
+  p.adjust.method = "holm")
+
+
+
+
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+sup1.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+
+
+
+
+
+
+ggplot(sup1.result, aes(x=Incubation.time, y =OD600,group=Group,color=Group)) + 
+  geom_point(position = position_jitter(width = 0.4, height = 0.05, seed = 123)) +
+  stat_smooth(method="loess",span = 0.5, se = TRUE, level = 0.95, aes(x=Incubation.time, y =OD600,group=Group,color=Group))+
+   theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')+
+  stat_summary(fun.y="mean",geom="point",size=3) +      
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)
+
+
+
+
+
+```
+# Figure 5c
+
+```{r global_options, iNegativelude=FALSE}
+sup1.result <- read.csv('input/OMV-实验结果23.2.24-RCM-PC.csv',header=T)
+
+
+
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+
+
+sup1.result <- subset(sup1.result,sup1.result$Group%in%c("Pc+Bo-omv","Pc+Bv-omv","Pc"))
+
+
+
+p <- compare_means(
+  OD600~Group,
+  data=sup1.result,
+  method = "t.test",
+  paired = FALSE,
+  group.by =c('Incubation.time'),
+  p.adjust.method = "holm")
+
+
+
+
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+
+sup1.result %>%
+  mutate(Incubation.time=as.factor(Incubation.time)) %>% 
+  group_by(Group) %>%
+  ggplot(aes(x = Incubation.time,y =OD600,
+           group=Group,color=Group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=3) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+
+
+
+
+
+
+ggplot(sup1.result, aes(x=Incubation.time, y =OD600,group=Group,color=Group)) + 
+  geom_point(position = position_jitter(width = 1, height = 0.05, seed = 123)) +
+  stat_smooth(method="loess",span = 0.5, se = TRUE, level = 0.95, aes(x=Incubation.time, y =OD600,group=Group,color=Group))+
+  stat_summary(fun.y="mean",geom="point",size=3) +       
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.5)+
+   theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')
+
+
+
+
+
+```
+
+
+
+
+
+## Figure 5d
+                     
+```{r,echo = TRUE}
+
+library(ggpubr)
+library(ggplot2)
+library(vegan)
+
+
+count.new <- read.csv('input/Expressed_annotation_去除非细菌来源的蛋白.csv',header = T,row.names = 1)
+met <- read.csv('input/met.txt',header = T,sep = '\t')
+rownames(met) <- met$ID
+
+tax <- count.new[,-c(5:20)]
+
+count.new <- count.new[,c(5:20)]
+
+count.new <- as.data.frame(t(count.new ))
+
+
+bray <- as.matrix(vegan::vegdist(as.matrix(count.new ),method ='bray'))
+
+adonis.result<-adonis(bray~met$Group)$aov.tab
+
+
+
+#PCOA 计算
+bray.pcoa <-  cmdscale(bray, k=2, eig=T) # k is dimension,  eig is eigenvalues
+bray.points <-  as.data.frame(bray.pcoa$points) # get coordinate string, format to dataframme
+colnames(bray.points) = c("x", "y") 
+bray.eig <- bray.pcoa$eig
+#添加样品组信息：合并PCoA坐标与实验设计
+bray.points <-  cbind(bray.points, met[match(rownames(bray.points), rownames(met)), ])
+
+bray.points$Group <- as.factor(bray.points$Group)
+
+
+
+
+
+
+ggplot(data=bray.points,
+       aes(x=x,y=y,
+           color=Group))+
+  geom_point(size=3)+
+  theme_cleveland()+
+  geom_vline(xintercept = 0,lty="dashed",color='grey')+
+  geom_hline(yintercept = 0,lty="dashed",color='grey')+
+  labs(x=paste("PCoA 1 (", format(100 * bray.eig[1] / sum(bray.eig), digits=4), "%)", sep=""),
+       y=paste("PCoA 2 (", format(100 * bray.eig[2] / sum(bray.eig), digits=4), "%)", sep=""))+
+  stat_ellipse(data=bray.points,
+               aes(fill=Group),
+               level = 0.80,
+               alpha=0.6)+
+   theme_cleveland()+ #背景变为白色
+  theme(legend.position="right", 
+        legend.title = element_blank(),
+        legend.text = element_text(colour="black",size=14),
+        axis.text.x=element_text(colour="black",size=14), #设置x轴刻度标签的字体属性
+        axis.text.y=element_text(size=14,colour="black"), #设置x轴刻度标签的字体属性
+        axis.title.y=element_text(size = 18,vjust = 2), #设置y轴的标题的字体属性
+        axis.title.x=element_text(size = 14), #设置x轴的标题的字体属性
+        plot.title = element_text(size=15,face="bold",hjust = 0.5), #设置总标题的字体属性
+        panel.grid.major = element_blank(), #不显示网格线
+        panel.grid.minor = element_blank())+
+  scale_color_manual(values = mypal1)+
+  scale_fill_manual(values = mypal1)+
+  annotate("text",x=-0.2,y=0.6,label="Adonis test: P <0.001",size=4,colour='black')+ggtitle('4D-DIA quantitative proteomics')
+
+
+
+
+
+
+
+
+
+```
+
+## Figure 5e
+
+                    
+```{r,echo=TRUE}
+
+library(ggpubr)
+library(ggplot2)
+library(vegan)
+library(microeco)
+
+
+count.new <- read.csv('input/Expressed_annotation_去除非细菌来源的蛋白.csv',header = T,row.names = 1)
+met <- read.csv('input/met.txt',header = T,sep = '\t')
+rownames(met) <- met$ID
+tax <- count.new[,c(1,4,28)]
+
+
+Bo_met <- subset(met,met$Group%in%c('Bo-omv'))
+
+Bo <- count.new[,rownames(Bo_met)]
+
+Bo <- Bo[rowMeans(Bo)>0,]
+
+Bo$ID <- rownames(Bo)
+tax$ID <- row.names(tax)
+
+Bo <- merge(tax,Bo,by='ID')
+
+Bo_table <- as.data.frame(table(Bo$Subcellular_localization))
+
+Bo_table$Group <- c('Bo-omv')
+
+
+count.new <- read.csv('input/Expressed_annotation_去除非细菌来源的蛋白.csv',header = T,row.names = 1)
+met <- read.csv('input/met.txt',header = T,sep = '\t')
+rownames(met) <- met$ID
+tax <- count.new[,c(1,4,28)]
+Bp_met <- subset(met,met$Group%in%c('Bp-omv'))
+Bp <- count.new[,rownames(Bp_met)]
+Bp <- Bp[rowMeans(Bp)>0,]
+Bp$ID <- rownames(Bp)
+tax$ID <- row.names(tax)
+Bp <- merge(tax,Bp,by='ID')
+Bp_table <- as.data.frame(table(Bp$Subcellular_localization))
+Bp_table$Group <- c('Bp-omv')
+
+
+
+count.new <- read.csv('input/Expressed_annotation_去除非细菌来源的蛋白.csv',header = T,row.names = 1)
+met <- read.csv('input/met.txt',header = T,sep = '\t')
+rownames(met) <- met$ID
+tax <- count.new[,c(1,4,28)]
+Bv_met <- subset(met,met$Group%in%c('Bv-omv'))
+Bv <- count.new[,rownames(Bv_met)]
+Bv <- Bv[rowMeans(Bv)>0,]
+Bv$ID <- rownames(Bv)
+tax$ID <- row.names(tax)
+Bv <- merge(tax,Bv,by='ID')
+Bv_table <- as.data.frame(table(Bv$Subcellular_localization))
+Bv_table$Group <- c('Bv-omv')
+
+
+
+count.new <- read.csv('input/Expressed_annotation_去除非细菌来源的蛋白.csv',header = T,row.names = 1)
+met <- read.csv('input/met.txt',header = T,sep = '\t')
+rownames(met) <- met$ID
+tax <- count.new[,c(1,4,28)]
+Pc_met <- subset(met,met$Group%in%c('Pc-omv'))
+Pc <- count.new[,rownames(Pc_met)]
+Pc <- Pc[rowMeans(Pc)>0,]
+Pc$ID <- rownames(Pc)
+tax$ID <- row.names(tax)
+Pc <- merge(tax,Pc,by='ID')
+Pc_table <- as.data.frame(table(Pc$Subcellular_localization))
+Pc_table$Group <- c('Pc-omv')
+
+
+
+all.table <- rbind(Bo_table,Bp_table,Bv_table,Pc_table)
+
+
+all.table <- all.table[order(all.table$Freq,decreasing = T),]
+
+all.table$Subcellular_localization <- all.table$Var1
+
+
+
+all.table$Subcellular_localization <- factor(all.table$Subcellular_localization,levels = unique(all.table$Subcellular_localization))
+
+
+ggplot(all.table,aes(x=Group,y=Freq,fill=Subcellular_localization))+
+  geom_bar(stat = "identity",size=0.1,width = 0.5,position = "stack",color='black')+
+  geom_text(aes(label=Freq),size=3,position =position_stack(0.8))+ 
+  theme_cleveland()+ #背景变为白色
+  theme(legend.position="right", 
+        legend.title = element_blank(),
+        legend.text = element_text(colour="black",size=14),
+        axis.text.x=element_text(colour="black",size=14), #设置x轴刻度标签的字体属性
+        axis.text.y=element_text(size=14,colour="black"), #设置x轴刻度标签的字体属性
+        axis.title.y=element_text(size = 14,vjust = 2), #设置y轴的标题的字体属性
+        axis.title.x=element_text(size = 14), #设置x轴的标题的字体属性
+        plot.title = element_text(size=15,face="bold",hjust = 0.5), #设置总标题的字体属性
+        panel.grid.major = element_blank(), #不显示网格线
+        panel.grid.minor = element_blank())+
+  scale_color_manual(values = mypal3)+
+  scale_fill_manual(values = mypal3)+
+  labs(x='',y='Number of proteins',title = 'Subcellular localization of proteins')
+
+
+
+
+
+
+
+
+```
+
+## Figure 5f
+
+                    
+```{r,echo=TRUE}
+
+count.new <- read.csv('input/Expressed_annotation_去除非细菌来源的蛋白.csv',header = T,row.names = 1)
+met <- read.csv('input/met.txt',header = T,sep = '\t')
+rownames(met) <- met$ID
+
+#met <- subset(met,met$Group%in%c('Bo-omv','Pc-omv'))
+
+met$Group <- as.factor(met$Group)
+
+tax <- count.new[,c(1:4,28)]
+
+count.new <- count.new[,rownames(met)]
+
+count.new <- count.new[rowMeans(count.new)>1.5,]
+count.new <- as.data.frame(t(count.new ))
+count.new <- as.matrix(count.new)
+
+
+Pro <- data.frame(ID=colnames(count.new))
+tax$ID <- rownames(tax)
+
+Pro <- merge(tax,Pro,by='ID')
+
+count.new.1 <- as.data.frame(t(count.new))
+count.new.1$ID <- rownames(count.new.1)
+
+count.new.1 <- merge(tax,count.new.1,by='ID')
+row.names(count.new.1) <- count.new.1$ID
+
+count.new.1 <- count.new.1[colnames(count.new),]
+
+library(pheatmap)
+
+count.new <- as.data.frame(t(count.new))
+
+
+
+
+
+
+annotation_col = data.frame(
+  Group = met$Group)
+rownames(annotation_col) <- met$ID
+
+
+
+
+
+ann_colors=list(Group=c("Pc-omv"="#0099B4FF","Bo-omv"="#00468BFF","Bv-omv"="#42B540FF","Bp-omv"="#ED0000FF"))
+
+
+
+pheatmap(count.new,scale = 'row',
+         labels_row = count.new.1$Protein,
+         cluster_cols=F,
+         clustering_method = "ward.D",
+         cluster_rows=T,
+         show_colnames = T,
+         show_rownames = T, 
+         cellwidth = 15,
+         cellheight =15,
+         border=F,
+         annotation_col=annotation_col,
+         annotation_colors = ann_colors,
+         gaps_col = c(4, 8, 12,16))
+
+
+```

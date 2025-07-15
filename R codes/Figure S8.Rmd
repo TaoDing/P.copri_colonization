@@ -1,0 +1,148 @@
+---
+title: "拟杆菌omv实验"
+output: html_document
+
+---
+```{r setup, iNegativelude=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## 配色
+```{r global_options, iNegativelude=FALSE}
+library(ggplot2)
+library(ggsci)
+
+mypal1 <- ggsci::pal_lancet( alpha = 1)(9) 
+mypal2 <- ggsci::pal_npg( alpha = 0.5)(9)
+
+
+
+```
+
+
+
+
+# Figure S8
+
+```{r}
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+
+result <- read.csv('input/250326.csv',check.names = F)
+result <- melt(result,id.vars = colnames(result[,1:5]))
+
+omv <- subset(result,facet=='2')
+
+omv$OD600 <- omv$value
+
+omv$Time <- as.character(omv$variable)
+omv$Time <- as.numeric(omv$Time)
+omv$group <- as.factor(omv$group)
+
+
+ggplot(omv, aes(x = Time, y = OD600, color = group, group = group)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.3) +
+  labs(x = "Time (hours)", y = "OD600", title = "Bacterial Growth Curve") +
+  theme_minimal()
+
+
+
+
+
+
+
+library(ggsci)
+library(patchwork)
+library(ggpubr)
+library(pracma)  # 用于数值积分计算AUC
+
+set.seed(123)
+
+
+#计算每个样本的 AUC（而不是每组一个 AUC）
+
+auc_values_per_sample <- omv %>%
+  group_by(ID) %>%
+  summarise(AUC= trapz(Time, OD600))
+
+auc_values_per_sample <- merge(auc_values_per_sample,omv,by='ID')
+
+
+# 单因素方差分析 (ANOVA)
+anova_result <- aov(AUC ~ group, data = auc_values_per_sample)
+
+options(max.print = 10000)  # 允许输出更多行
+summary(anova_result)
+
+# 事后检验（Tukey HSD 多重比较）
+TukeyHSD(anova_result)
+
+
+# 正态性检验（Shapiro-Wilk test）
+shapiro.test(auc_values_per_sample$AUC)  
+
+# 方差齐性检验（Levene’s test）
+library(car)
+leveneTest(AUC ~ group, data = auc_values_per_sample)
+
+
+#AUC为非正态分布
+
+kruskal.test(AUC ~ group, data = auc_values_per_sample)
+
+library(rstatix)
+#两两比较
+
+# 1. 计算 p 值（Bonferroni 校正）
+auc.p <- pairwise_wilcox_test(AUC ~ group, data = auc_values_per_sample, p.adjust.method = "bonferroni")
+
+# 2. 计算效应量
+size <- wilcox_effsize(AUC ~ group, data = auc_values_per_sample)
+
+# 3. 合并 p 值和效应量数据
+result <- merge(auc.p, size, by = c("group1", "group2"))
+
+# 4. 仅保留 p < 0.05 且效应量 > 0.5 的比较
+# 仅保留 p < 0.05 且效应量 > 0.5 的比较
+significant_results <- result %>%
+  filter(p.adj < 0.05 & effsize > 0.5) %>%
+  arrange(p.adj) %>%  # 按 p 值排序
+  mutate(y.position = seq(from = max(omv$OD600) * 1.1, by = 0.05, length.out = n())) # 依次增加 y 坐标，避免重叠
+
+# 仅保留 group1 == "SC"
+significant_results <- result %>%
+  filter(group1 == "Sc" & p.adj < 0.05 & effsize > 0.5) %>%
+  arrange(p.adj) %>%  
+  mutate(y.position = seq(from = max(omv$OD600) * 1.1, by = 0.05, length.out = n())) 
+
+# 绘制生长曲线
+omv %>%
+  group_by(group) %>%
+  ggplot(aes(x = Time,y =OD600,
+           group=group,color=group)) +                            
+  stat_summary(fun.y="mean",geom="point",size=1) +        
+  stat_summary(fun.y="mean",geom="line",size=1) +  
+  stat_summary(fun.data = "mean_se",geom = "errorbar",width=0.1)+
+  scale_color_nejm()+
+  theme_cleveland()+ 
+  theme(panel.grid=element_blank(),
+        strip.background =element_blank(),
+        strip.text =element_text(size=14,colour = 'black',face = 'italic') ) + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  theme(axis.title.x =element_text(size=14,colour = 'black'), axis.title.y=element_text(size=14,colour = 'black'))+ 
+  theme(axis.text.x = element_text(size=14,colour = 'black'),axis.text.y = element_text(size=14,colour = 'black')) + 
+  theme(legend.text = element_text(size=14,colour = 'black')) +
+  theme(legend.title = element_text(size=14,colour = 'black',face = 'italic'))+
+  guides(color = guide_legend(title = NULL))+
+  scale_color_manual(values = c(mypal1,mypal2))+
+   labs(y = "OD600",x='Incubation time (h)')+
+  # 添加多组比较的 p 值
+  geom_text(data = significant_results, 
+            aes(x = 5, y = y.position-0.7, 
+                label = paste(group1, "vs", group2, ":p.signif =", p.adj.signif,":effect.size=",round(effsize,2))),
+            inherit.aes = FALSE, size = 4, color = "black", fontface = "italic",hjust = 0)
+```
